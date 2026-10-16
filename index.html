@@ -45,7 +45,7 @@
     .btn-send { width: 42px; height: 42px; border-radius: 50%; background: #00a884; color: white; border: none; font-size: 1.1rem; cursor: pointer; }
 
     /* POPUP @ MENÇÃO */
-    .popup-at { position: absolute; bottom: 60px; left: 10px; right: 10px; background: white; border-radius: 8px; border: 1px solid #ccc; display: none; box-shadow: 0 -4px 10px rgba(0,0,0,0.15); z-index: 10; }
+    .popup-at { position: absolute; bottom: 60px; left: 10px; right: 10px; background: white; border-radius: 8px; border: 1px solid #ccc; display: none; box-shadow: 0 -4px 10px rgba(0,0,0,0.15); z-index: 10; max-height: 200px; overflow-y: auto; }
     .popup-item { padding: 8px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #eee; }
     .popup-item:hover { background: #f0f4ff; }
 
@@ -64,6 +64,11 @@
     @keyframes uaepaSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     @keyframes uaepaPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.95); opacity: 0.9; } }
     .uaepa-loader-text { margin-top: 8px; font-size: 0.82rem; font-weight: bold; color: #002288; text-align: center; }
+
+    /* LISTA DE MEMBROS DA EQUIPE */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 8px; }
+    .team-card { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #002288; border-radius: 8px; padding: 10px; font-size: 0.82rem; }
+    .team-card strong { color: #002288; font-size: 0.9rem; display: block; margin-bottom: 2px; }
 
     .frame-agenda { width: 100%; height: 320px; border: none; border-radius: 8px; }
     .audit-box { max-height: 180px; overflow-y: auto; font-size: 0.8rem; background: #f8fafc; padding: 8px; border-radius: 6px; }
@@ -98,17 +103,49 @@
         <div style="text-align: center; color: #888; font-size: 0.8rem; padding: 20px;">Inicie a conversa enviando uma mensagem...</div>
       </div>
 
-      <!-- POPUP @ MENÇÃO -->
+      <!-- POPUP @ MENÇÃO (MEMBROS ÚNICOS SEM DUPLICIDADE) -->
       <div id="popup-mencoes" class="popup-at">
+        <div class="popup-item" onclick="inserirTag('@Fabio Martins')">👑 @Fabio Martins (Super Admin)</div>
         <div class="popup-item" onclick="inserirTag('@Matheus')">👤 @Matheus (Audiovisual)</div>
         <div class="popup-item" onclick="inserirTag('@Guilherme')">👤 @Guilherme (Audiovisual)</div>
-        <div class="popup-item" onclick="inserirTag('@Fabio Martins')">👑 @Fabio Martins (Super Admin)</div>
+        <div class="popup-item" onclick="inserirTag('@Ricardo')">👤 @Ricardo (Equipe UAEPA)</div>
+        <div class="popup-item" onclick="inserirTag('@Rafael')">👤 @Rafael (Equipe UAEPA)</div>
       </div>
 
       <div class="chat-controls">
         <input type="text" id="msg-input" class="input-chat" placeholder="Digite uma mensagem ou @ para marcar..." oninput="checarArroba(this)" onkeypress="if(event.key==='Enter') enviarMsgTexto()">
         <button id="btn-ptt" class="btn-ptt-mic" title="Segure para falar (PTT)">🎙️</button>
         <button onclick="enviarMsgTexto()" class="btn-send">➢</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 👥 EQUIPE UAEPA - MEMBROS CADASTRADOS -->
+  <div class="card">
+    <h3>👥 Equipe e Colaboradores UAEPA</h3>
+    <div class="team-grid">
+      <div class="team-card">
+        <strong>👑 Fabio Martins</strong>
+        fabio.martins@hc.fm.usp.br<br>
+        📞 (11) 94791-7162
+      </div>
+      <div class="team-card">
+        <strong>👤 Matheus</strong>
+        Audiovisual UAEPA
+      </div>
+      <div class="team-card">
+        <strong>👤 Guilherme</strong>
+        Audiovisual UAEPA
+      </div>
+      <div class="team-card">
+        <strong>👤 Ricardo</strong>
+        antonio.lazaro@hc.fm.usp<br>
+        📞 (11) 97059-6339
+      </div>
+      <div class="team-card">
+        <strong>👤 Rafael</strong>
+        rafael.siqueira382@gmail.com<br>
+        📞 (11) 99234-9012
       </div>
     </div>
   </div>
@@ -169,7 +206,6 @@
       respBox.style.display = 'block';
       respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Gemini IA pesquisando no acervo UAEPA...');
 
-      // Faz a consulta para o servidor no Google Apps Script
       fetch('https://script.google.com/macros/s/AKfycbx_exemplo/exec?action=gemini&prompt=' + encodeURIComponent(p))
         .then(res => res.text())
         .then(txt => {
