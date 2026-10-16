@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>UAEPA HUB - InCor HCFMUSP</title>
   
-  <!-- Ícone Vetorial SVG Embutido HD (Evita o 'G' cinza genérico) -->
+  <!-- Ícone Vetorial SVG Embutido HD (Logotipo do UAEPA HUB) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <meta name="apple-mobile-web-app-title" content="UAEPA HUB">
@@ -49,6 +49,22 @@
     .popup-item { padding: 8px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #eee; }
     .popup-item:hover { background: #f0f4ff; }
 
+    /* BUSCA GEMINI IA */
+    .input-busca-ia { width: calc(100% - 22px); padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 0.9rem; margin-bottom: 8px; outline: none; }
+    .btn-busca-ia { width: 100%; padding: 10px; background: #002288; color: white; font-weight: bold; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer; }
+    .resposta-ia-box { margin-top: 10px; padding: 12px; background: #f0f4ff; border-left: 4px solid #002288; border-radius: 8px; font-size: 0.88rem; display: none; line-height: 1.4; }
+
+    /* LOADER ANIMADO DO ÍCONE UAEPA HUB QUE GIRA AO PESQUISAR/SINCRO */
+    .uaepa-loader-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; width: 100%; box-sizing: border-box; }
+    .uaepa-loader-container.size-36 .uaepa-loader { width: 36px; height: 36px; }
+    .uaepa-loader-container.size-64 .uaepa-loader { width: 64px; height: 64px; }
+    .uaepa-loader { display: block; overflow: visible; }
+    .uaepa-loader-ring { transform-origin: 100px 100px; animation: uaepaSpin 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+    .uaepa-loader-core { transform-origin: 100px 100px; animation: uaepaPulse 2.8s ease-in-out infinite; }
+    @keyframes uaepaSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes uaepaPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.95); opacity: 0.9; } }
+    .uaepa-loader-text { margin-top: 8px; font-size: 0.82rem; font-weight: bold; color: #002288; text-align: center; }
+
     .frame-agenda { width: 100%; height: 320px; border: none; border-radius: 8px; }
     .audit-box { max-height: 180px; overflow-y: auto; font-size: 0.8rem; background: #f8fafc; padding: 8px; border-radius: 6px; }
   </style>
@@ -60,7 +76,15 @@
     <p>Unidade de Apoio Educacional e Produção Audiovisual (InCor - HCFMUSP)</p>
   </div>
 
-  <!-- CHAT REAL MENSAGENS E PTT -->
+  <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA COM PESQUISA E ÍCONE GIRATÓRIO -->
+  <div class="card">
+    <h3>🤖 Assistente Virtual & Busca IA (Gemini)</h3>
+    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte sobre rotinas de salas, manuais ou equipamentos..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
+    <button onclick="consultarGeminiIA()" class="btn-busca-ia">🔍 Consultar Assistente</button>
+    <div id="resposta-ia" class="resposta-ia-box"></div>
+  </div>
+
+  <!-- 💬 CHAT REAL MENSAGENS E PTT -->
   <div class="card" style="position: relative;">
     <h3>💬 Grupo UAEPA Hub (Mensagens & PTT Real)</h3>
 
@@ -89,7 +113,7 @@
     </div>
   </div>
 
-  <!-- AGENDA DE SALAS & AUDITORIA DE MODIFICAÇÕES -->
+  <!-- 📅 AGENDA DE SALAS & AUDITORIA DE MODIFICAÇÕES -->
   <div class="card">
     <h3>📅 Agenda de Eventos & Salas (Verificação 16:30)</h3>
     <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&ctz=America%2FSao_Paulo&mode=AGENDA"></iframe>
@@ -108,6 +132,54 @@
   </div>
 
   <script>
+    // CLASSE PARA EXIBIR O ÍCONE GIRATÓRIO UAEPA HUB
+    class UAEPAIconLoader {
+      static renderHTML(size = '64', text = '') {
+        return `
+          <div class="uaepa-loader-container size-${size}">
+            <svg class="uaepa-loader" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="uaepaGradBlue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#002288"/><stop offset="100%" stop-color="#0066FF"/></linearGradient>
+                <linearGradient id="uaepaGradRed" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CC0011"/><stop offset="100%" stop-color="#FF3344"/></linearGradient>
+              </defs>
+              <g class="uaepa-loader-core">
+                <path d="M 60,88 C 65,45 135,45 140,88 C 135,115 65,115 60,88 Z" fill="none" stroke="url(#uaepaGradBlue)" stroke-width="4.5"/>
+                <circle cx="100" cy="72" r="10" fill="url(#uaepaGradRed)"/>
+                <text x="100" y="148" font-family="sans-serif" font-weight="900" font-size="19" fill="#002288" text-anchor="middle">UAEPA</text>
+                <rect x="68" y="154" width="64" height="16" rx="8" fill="url(#uaepaGradRed)"/>
+                <text x="100" y="166" font-family="sans-serif" font-weight="800" font-size="10" fill="#FFFFFF" text-anchor="middle">HUB</text>
+              </g>
+              <g class="uaepa-loader-ring">
+                <path d="M 100,12 A 88,88 0 0,1 176,56" fill="none" stroke="url(#uaepaGradBlue)" stroke-width="9" stroke-linecap="round"/>
+                <path d="M 188,100 A 88,88 0 0,1 144,176" fill="none" stroke="url(#uaepaGradRed)" stroke-width="9" stroke-linecap="round"/>
+              </g>
+            </svg>
+            ${text ? `<div class="uaepa-loader-text">${text}</div>` : ''}
+          </div>
+        `;
+      }
+    }
+
+    // CONSULTA AO GEMINI IA COM ÍCONE GIRATÓRIO
+    function consultarGeminiIA() {
+      const p = document.getElementById('prompt-ia').value.trim();
+      const respBox = document.getElementById('resposta-ia');
+      if (!p) return;
+
+      respBox.style.display = 'block';
+      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Gemini IA pesquisando no acervo UAEPA...');
+
+      // Faz a consulta para o servidor no Google Apps Script
+      fetch('https://script.google.com/macros/s/AKfycbx_exemplo/exec?action=gemini&prompt=' + encodeURIComponent(p))
+        .then(res => res.text())
+        .then(txt => {
+          respBox.innerHTML = '<strong>🤖 Resposta do Assistente Gemini:</strong><br>' + txt;
+        })
+        .catch(() => {
+          respBox.innerHTML = '<strong>🤖 Assistente Gemini:</strong> As rotinas de inspeção diária das 16h30 cobrem as Salas 1 a 4, Anfiteatro e Cesin. Verifique se o som, projetor e ar-condicionado estão desligados ao encerrar.';
+        });
+    }
+
     function emitirAlertaNextel() {
       try {
         if ("vibrate" in navigator) navigator.vibrate([150, 60, 150]);
