@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>UAEPA HUB - InCor HCFMUSP</title>
+  
+  <!-- Ícone Vetorial SVG Embutido HD (Evita o 'G' cinza genérico) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
+  <meta name="apple-mobile-web-app-title" content="UAEPA HUB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#002288">
+
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 12px; background-color: #d1d7db; color: #111b21; }
+    
+    .header { text-align: center; padding: 14px; background: linear-gradient(135deg, #002288, #0055ff); color: white; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,34,136,0.3); }
+    .header h1 { margin: 0; font-size: 1.5rem; letter-spacing: 0.5px; }
+    .header p { margin: 2px 0 0 0; font-size: 0.8rem; opacity: 0.9; }
+
+    .card { background: white; padding: 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 12px; }
+    .card h3 { margin-top: 0; color: #002288; font-size: 1rem; border-bottom: 2px solid #f0f3f8; padding-bottom: 6px; margin-bottom: 10px; }
+
+    .badge-master { background: #002288; color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; display: inline-block; }
+
+    /* MENSAGEIRO ESTILO WHATSAPP NATIVO */
+    .chat-box { background: #efeae2; border-radius: 10px; height: 380px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; }
+    .chat-top { background: #075e54; color: white; padding: 10px 14px; font-weight: bold; font-size: 0.9rem; display: flex; justify-content: space-between; }
+    .chat-body { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background-image: radial-gradient(#cbd5e1 1px, transparent 0); background-size: 10px 10px; }
+    
+    .bubble { max-width: 80%; padding: 8px 10px; border-radius: 8px; font-size: 0.86rem; position: relative; word-break: break-word; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+    .bubble.me { align-self: flex-end; background-color: #d9fdd3; color: #111b21; }
+    .bubble.them { align-self: flex-start; background-color: #ffffff; color: #111b21; }
+    .bubble-author { font-size: 0.7rem; font-weight: bold; color: #075e54; margin-bottom: 2px; }
+    .bubble-time { font-size: 0.62rem; color: #667781; text-align: right; margin-top: 3px; }
+    .tag-mencao { background: #002288; color: white; padding: 1px 5px; border-radius: 3px; font-weight: bold; font-size: 0.75rem; }
+
+    /* PTT E CONTROLES */
+    .chat-controls { display: flex; padding: 8px; background: #f0f2f5; gap: 6px; align-items: center; border-top: 1px solid #d1d7db; }
+    .input-chat { flex: 1; padding: 10px 12px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.9rem; outline: none; }
+    .btn-ptt-mic { width: 42px; height: 42px; border-radius: 50%; background: #cc0011; color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none; }
+    .btn-ptt-mic.recording { background: #22cc44; animation: pulse 1s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    .btn-send { width: 42px; height: 42px; border-radius: 50%; background: #00a884; color: white; border: none; font-size: 1.1rem; cursor: pointer; }
+
+    /* POPUP @ MENÇÃO */
+    .popup-at { position: absolute; bottom: 60px; left: 10px; right: 10px; background: white; border-radius: 8px; border: 1px solid #ccc; display: none; box-shadow: 0 -4px 10px rgba(0,0,0,0.15); z-index: 10; }
+    .popup-item { padding: 8px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #eee; }
+    .popup-item:hover { background: #f0f4ff; }
+
+    .frame-agenda { width: 100%; height: 320px; border: none; border-radius: 8px; }
+    .audit-box { max-height: 180px; overflow-y: auto; font-size: 0.8rem; background: #f8fafc; padding: 8px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>UAEPA HUB</h1>
+    <p>Unidade de Apoio Educacional e Produção Audiovisual (InCor - HCFMUSP)</p>
+  </div>
+
+  <!-- CHAT REAL MENSAGENS E PTT -->
+  <div class="card" style="position: relative;">
+    <h3>💬 Grupo UAEPA Hub (Mensagens & PTT Real)</h3>
+
+    <div class="chat-box">
+      <div class="chat-top">
+        <span>👥 Conversa em Tempo Real</span>
+        <span id="user-display" style="font-size: 0.75rem; opacity: 0.9;">Fabio Martins</span>
+      </div>
+
+      <div id="chat-body" class="chat-body">
+        <div style="text-align: center; color: #888; font-size: 0.8rem; padding: 20px;">Inicie a conversa enviando uma mensagem...</div>
+      </div>
+
+      <!-- POPUP @ MENÇÃO -->
+      <div id="popup-mencoes" class="popup-at">
+        <div class="popup-item" onclick="inserirTag('@Matheus')">👤 @Matheus (Audiovisual)</div>
+        <div class="popup-item" onclick="inserirTag('@Guilherme')">👤 @Guilherme (Audiovisual)</div>
+        <div class="popup-item" onclick="inserirTag('@Fabio Martins')">👑 @Fabio Martins (Super Admin)</div>
+      </div>
+
+      <div class="chat-controls">
+        <input type="text" id="msg-input" class="input-chat" placeholder="Digite uma mensagem ou @ para marcar..." oninput="checarArroba(this)" onkeypress="if(event.key==='Enter') enviarMsgTexto()">
+        <button id="btn-ptt" class="btn-ptt-mic" title="Segure para falar (PTT)">🎙️</button>
+        <button onclick="enviarMsgTexto()" class="btn-send">➢</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENDA DE SALAS & AUDITORIA DE MODIFICAÇÕES -->
+  <div class="card">
+    <h3>📅 Agenda de Eventos & Salas (Verificação 16:30)</h3>
+    <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&ctz=America%2FSao_Paulo&mode=AGENDA"></iframe>
+    
+    <div style="margin-top: 10px;">
+      <strong>📜 Auditoria de Modificações da Agenda:</strong>
+      <div id="audit-log" class="audit-box" style="margin-top: 4px;">Nenhuma alteração de agendamento recente.</div>
+    </div>
+  </div>
+
+  <!-- ASSINATURA GOVERNANÇA MASTER -->
+  <div style="text-align: center; font-size: 0.75rem; color: #666; margin-top: 15px;">
+    <span class="badge-master">SUPER ADMIN MASTER</span><br>
+    <strong>Fabio Martins</strong> | fabio.martins@hc.fm.usp.br | (11) 94791-7162<br>
+    UAEPA - InCor HCFMUSP
+  </div>
+
+  <script>
+    function emitirAlertaNextel() {
+      try {
+        if ("vibrate" in navigator) navigator.vibrate([150, 60, 150]);
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1800, ctx.currentTime);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.1);
+        setTimeout(() => {
+          const osc2 = ctx.createOscillator();
+          const gain2 = ctx.createGain();
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(2400, ctx.currentTime);
+          gain2.gain.setValueAtTime(0.2, ctx.currentTime);
+          osc2.connect(gain2);
+          gain2.connect(ctx.destination);
+          osc2.start();
+          osc2.stop(ctx.currentTime + 0.15);
+        }, 110);
+      } catch (e) {}
+    }
+
+    function checarArroba(input) {
+      const pop = document.getElementById('popup-mencoes');
+      if (input.value.endsWith('@')) pop.style.display = 'block';
+      else if (!input.value.includes('@')) pop.style.display = 'none';
+    }
+
+    function inserirTag(tag) {
+      const inp = document.getElementById('msg-input');
+      inp.value = inp.value.substring(0, inp.value.lastIndexOf('@')) + tag + ' ';
+      document.getElementById('popup-mencoes').style.display = 'none';
+      inp.focus();
+    }
+
+    let mediaRecorder = null;
+    let chunks = [];
+    let recording = false;
+    const btnPtt = document.getElementById('btn-ptt');
+
+    btnPtt.addEventListener('mousedown', startPtt);
+    btnPtt.addEventListener('mouseup', stopPtt);
+    btnPtt.addEventListener('touchstart', (e) => { e.preventDefault(); startPtt(); }, { passive: false });
+    btnPtt.addEventListener('touchend', (e) => { e.preventDefault(); stopPtt(); }, { passive: false });
+
+    async function startPtt() {
+      if (recording) return;
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+        chunks = [];
+        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+        mediaRecorder.start();
+        recording = true;
+        btnPtt.classList.add('recording');
+      } catch (err) {
+        alert('Permita o acesso ao microfone no navegador para enviar áudios PTT.');
+      }
+    }
+
+    function stopPtt() {
+      if (!recording || !mediaRecorder) return;
+      recording = false;
+      btnPtt.classList.remove('recording');
+      mediaRecorder.stop();
+      mediaRecorder.stream.getTracks().forEach(t => t.stop());
+
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(chunks, { type: 'audio/mp3' });
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          adicionarBalaoChat("Fabio Martins", "🎙️ Áudio de Voz PTT", true, reader.result);
+          emitirAlertaNextel();
+        };
+      };
+    }
+
+    function enviarMsgTexto() {
+      const inp = document.getElementById('msg-input');
+      if (!inp.value.trim()) return;
+      adicionarBalaoChat("Fabio Martins", inp.value.trim(), true, null);
+      emitirAlertaNextel();
+      inp.value = '';
+      document.getElementById('popup-mencoes').style.display = 'none';
+    }
+
+    function adicionarBalaoChat(autor, texto, isMe, audioUrl) {
+      const box = document.getElementById('chat-body');
+      if (box.innerText.includes('Inicie a conversa')) box.innerHTML = '';
+
+      const div = document.createElement('div');
+      div.className = `bubble ${isMe ? 'me' : 'them'}`;
+      
+      let conteudo = texto;
+      if (texto.includes('@')) {
+        conteudo = texto.replace(/(@\w+(\s\w+)?)/g, '<span class="tag-mencao">$1</span>');
+      }
+
+      if (audioUrl) {
+        conteudo += `<br><audio controls style="max-width:200px; height:30px; margin-top:4px;"><source src="${audioUrl}" type="audio/mp3"></audio>`;
+      }
+
+      const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      div.innerHTML = `
+        <div class="bubble-author">${autor}</div>
+        <div>${conteudo}</div>
+        <div class="bubble-time">${hora}</div>
+      `;
+
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+  </script>
+</body>
+</html>
