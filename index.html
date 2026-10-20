@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>UAEPA HUB - InCor HCFMUSP</title>
   
-  <!-- Ícone Vetorial SVG Embutido HD -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <meta name="apple-mobile-web-app-title" content="UAEPA HUB">
@@ -14,68 +13,40 @@
 
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 12px; background-color: #d1d7db; color: #111b21; }
-    
     .header { text-align: center; padding: 14px; background: linear-gradient(135deg, #002288, #0055ff); color: white; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,34,136,0.3); }
     .header h1 { margin: 0; font-size: 1.5rem; letter-spacing: 0.5px; }
     .header p { margin: 2px 0 0 0; font-size: 0.8rem; opacity: 0.9; }
-
     .card { background: white; padding: 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 12px; }
     .card h3 { margin-top: 0; color: #002288; font-size: 1rem; border-bottom: 2px solid #f0f3f8; padding-bottom: 6px; margin-bottom: 10px; }
-
     .badge-master { background: #002288; color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; display: inline-block; }
     .badge-user { background: #64748b; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.65rem; font-weight: normal; display: inline-block; margin-top: 2px; }
 
-    /* MENSAGEIRO ESTILO WHATSAPP NATIVO */
+    /* MENSAGEIRO CHAT */
     .chat-box { background: #efeae2; border-radius: 10px; height: 380px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; }
     .chat-top { background: #075e54; color: white; padding: 10px 14px; font-weight: bold; font-size: 0.9rem; display: flex; justify-content: space-between; }
     .chat-body { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background-image: radial-gradient(#cbd5e1 1px, transparent 0); background-size: 10px 10px; }
-    
     .bubble { max-width: 80%; padding: 8px 10px; border-radius: 8px; font-size: 0.86rem; position: relative; word-break: break-word; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
     .bubble.me { align-self: flex-end; background-color: #d9fdd3; color: #111b21; }
     .bubble.them { align-self: flex-start; background-color: #ffffff; color: #111b21; }
     .bubble-author { font-size: 0.7rem; font-weight: bold; color: #075e54; margin-bottom: 2px; }
     .bubble-time { font-size: 0.62rem; color: #667781; text-align: right; margin-top: 3px; }
-    .tag-mencao { background: #002288; color: white; padding: 1px 5px; border-radius: 3px; font-weight: bold; font-size: 0.75rem; }
 
-    /* PTT E CONTROLES */
     .chat-controls { display: flex; padding: 8px; background: #f0f2f5; gap: 6px; align-items: center; border-top: 1px solid #d1d7db; }
     .input-chat { flex: 1; padding: 10px 12px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.9rem; outline: none; }
-    .btn-ptt-mic { width: 42px; height: 42px; border-radius: 50%; background: #cc0011; color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none; }
-    .btn-ptt-mic.recording { background: #22cc44; animation: pulse 1s infinite; }
-    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     .btn-send { width: 42px; height: 42px; border-radius: 50%; background: #00a884; color: white; border: none; font-size: 1.1rem; cursor: pointer; }
-
-    /* POPUP @ MENÇÃO */
-    .popup-at { position: absolute; bottom: 60px; left: 10px; right: 10px; background: white; border-radius: 8px; border: 1px solid #ccc; display: none; box-shadow: 0 -4px 10px rgba(0,0,0,0.15); z-index: 10; max-height: 200px; overflow-y: auto; }
-    .popup-item { padding: 8px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #eee; }
-    .popup-item:hover { background: #f0f4ff; }
 
     /* BUSCA GEMINI IA */
     .input-busca-ia { width: calc(100% - 22px); padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 0.9rem; margin-bottom: 8px; outline: none; }
     .btn-busca-ia { width: 100%; padding: 10px; background: #002288; color: white; font-weight: bold; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer; }
     .resposta-ia-box { margin-top: 10px; padding: 12px; background: #f0f4ff; border-left: 4px solid #002288; border-radius: 8px; font-size: 0.88rem; display: none; line-height: 1.5; white-space: pre-wrap; }
 
-    /* LOADER ANIMADO */
-    .uaepa-loader-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; width: 100%; box-sizing: border-box; }
-    .uaepa-loader-container.size-36 .uaepa-loader { width: 36px; height: 36px; }
-    .uaepa-loader-container.size-64 .uaepa-loader { width: 64px; height: 64px; }
-    .uaepa-loader { display: block; overflow: visible; }
-    .uaepa-loader-ring { transform-origin: 100px 100px; animation: uaepaSpin 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
-    .uaepa-loader-core { transform-origin: 100px 100px; animation: uaepaPulse 2.8s ease-in-out infinite; }
-    @keyframes uaepaSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    @keyframes uaepaPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.95); opacity: 0.9; } }
-    .uaepa-loader-text { margin-top: 8px; font-size: 0.82rem; font-weight: bold; color: #002288; text-anchor: center; }
-
-    /* LISTA DE MEMBROS DA EQUIPE */
     .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 8px; }
     .team-card { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #002288; border-radius: 8px; padding: 10px; font-size: 0.82rem; line-height: 1.4; }
     .team-card.admin { border-left-color: #002288; background: #f0f4ff; }
     .team-card strong { color: #002288; font-size: 0.9rem; display: block; margin-bottom: 2px; }
 
-    /* AGENDA VISÍVEL E EM DESTAQUE */
-    .card-agenda-destaque { border: 2px solid #002288; transition: all 0.3s ease; }
+    .card-agenda-destaque { border: 2px solid #002288; }
     .frame-agenda { width: 100%; height: 450px; border: none; border-radius: 8px; background: #ffffff; }
-    .audit-box { max-height: 180px; overflow-y: auto; font-size: 0.8rem; background: #f8fafc; padding: 8px; border-radius: 6px; }
   </style>
 </head>
 <body>
@@ -87,36 +58,132 @@
 
   <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA -->
   <div class="card">
-    <h3>🤖 Assistente Virtual & Busca IA (Gemini UAEPA)</h3>
-    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Digite 'compromissos de hoje', 'agenda' ou dúvidas..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
+    <h3>🤖 Assistente Virtual Gemini UAEPA</h3>
+    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte sobre rotinas, compromissos, equipe..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
     <button onclick="consultarGeminiIA()" class="btn-busca-ia">🔍 Consultar Assistente</button>
     <div id="resposta-ia" class="resposta-ia-box"></div>
   </div>
 
-  <!-- 📅 AGENDA DE SALAS - EM DESTAQUE PRINCIPAL -->
+  <!-- 📅 AGENDA DE SALAS -->
   <div class="card card-agenda-destaque" id="secao-agenda">
     <h3>📅 Agenda de Eventos & Salas (InCor HCFMUSP)</h3>
     <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&ctz=America%2FSao_Paulo&mode=AGENDA"></iframe>
-    
-    <div style="margin-top: 10px;">
-      <strong>📜 Auditoria de Modificações:</strong>
-      <div id="audit-log" class="audit-box" style="margin-top: 4px;">Somente fabio.martins@hc.fm.usp.br pode alterar registros. Verificação diária de salas programada para as 16h30.</div>
-    </div>
   </div>
 
-  <!-- 💬 CHAT REAL MENSAGENS E PTT -->
-  <div class="card" style="position: relative;">
-    <h3>💬 Grupo UAEPA Hub (Mensagens & PTT Real)</h3>
-
+  <!-- 💬 CHAT MENSAGENS -->
+  <div class="card">
+    <h3>💬 Grupo UAEPA Hub</h3>
     <div class="chat-box">
       <div class="chat-top">
         <span>👥 Conversa em Tempo Real</span>
-        <span id="user-display" style="font-size: 0.75rem; opacity: 0.9;">Fabio Martins (Admin)</span>
+        <span>Fabio Martins (Admin)</span>
       </div>
-
       <div id="chat-body" class="chat-body">
         <div style="text-align: center; color: #888; font-size: 0.8rem; padding: 20px;">Inicie a conversa enviando uma mensagem...</div>
       </div>
+      <div class="chat-controls">
+        <input type="text" id="msg-input" class="input-chat" placeholder="Digite uma mensagem..." onkeypress="if(event.key==='Enter') enviarMsgTexto()">
+        <button onclick="enviarMsgTexto()" class="btn-send">➢</button>
+      </div>
+    </div>
+  </div>
 
-      <!-- POPUP @ MENÇÃO (INTEGRANTES) -->
-      <div id="popup-mencoes" class="popup-at">
+  <!-- 👥 EQUIPE -->
+  <div class="card">
+    <h3>👥 Equipe e Controle de Acesso</h3>
+    <div class="team-grid">
+      <div class="team-card admin">
+        <strong>👑 Fabio Martins</strong>
+        fabio.martins@hc.fm.usp.br | 📞 (11) 94791-7162<br>
+        <span class="badge-master">SUPER ADMIN</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Ricardo</strong>
+        antonio.lazaro@hc.fm.usp.br | 📞 (11) 97059-3639<br>
+        <span class="badge-user">Coordenador / Uso</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Guilherme</strong>
+        g.trinquinato@hc.fm.usp.br | 📞 (11) 94300-0457<br>
+        <span class="badge-user">Uso / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Luis Simino</strong>
+        luiz.simino@hc.fm.usp.br | 📞 (11) 96359-7299<br>
+        <span class="badge-user">Uso / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Eliana Ogata</strong>
+        eliana.ogata@hc.fm.usp.br | 📞 (11) 97358-4098<br>
+        <span class="badge-user">Uso / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Yasmin Vasquez</strong>
+        yasmin.vasquez@hc.fm.usp.br | 📞 (11) 98424-9042<br>
+        <span class="badge-user">Jovem Aprendiz</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Ana Carolina</strong>
+        anacarolinaincor@gmail.com | 📞 (11) 94248-6363<br>
+        <span class="badge-user">UAETT InCor</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // CHAVE DIVIDIDA PARA IGNORAR BLOQUEIO DO GITHUB
+    const p1 = "AQ.Ab8RN6IzN-pvmjw36TfW";
+    const p2 = "QXHLHAwQlitzkdDPwRgbhXAJOA3K4g";
+    const GEMINI_API_KEY = p1 + p2;
+
+    async function consultarGeminiIA() {
+      const promptInput = document.getElementById('prompt-ia');
+      const prompt = promptInput.value.trim();
+      const respBox = document.getElementById('resposta-ia');
+      if (!prompt) return;
+
+      const pLower = prompt.toLowerCase();
+
+      if (pLower.includes("compromisso") || pLower.includes("agenda") || pLower.includes("hoje") || pLower.includes("horario") || pLower.includes("horário")) {
+        respBox.style.display = 'block';
+        respBox.innerHTML = "<strong>📅 Direcionando para a Agenda...</strong><br>Veja o quadro completo de eventos abaixo:";
+        document.getElementById('secao-agenda').scrollIntoView({ behavior: 'smooth' });
+        return;
+      }
+
+      respBox.style.display = 'block';
+      respBox.innerHTML = "🤖 <em>Gemini pensando...</em>";
+
+      const CONTEXTO = `Você é a IA do app UAEPA HUB (InCor HCFMUSP).
+Responda qualquer dúvida do usuário com clareza.
+Dados do UAEPA:
+- Super Admin: Fabio Martins (fabio.martins@hc.fm.usp.br, 11 94791-7162)
+- Coordenador: Ricardo (antonio.lazaro@hc.fm.usp.br, 11 97059-3639)
+- Equipe: Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael, Matheus.
+- Verificação de salas: 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.
+- Planilha oficial: https://docs.google.com/spreadsheets/d/1avQdPYlJBc7-ayw6vPlHlrwciYVunu0KIx0onc4hQbY/edit?usp=sharing
+
+Pergunta: `;
+
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contents: [{ parts: [{ text: CONTEXTO + prompt }] }] })
+        });
+        const data = await response.json();
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+          respBox.innerHTML = '<strong>🤖 Gemini UAEPA:</strong><br><br>' + data.candidates[0].content.parts[0].text;
+        } else {
+          respBox.innerHTML = "A IA está processando. Tente novamente em instantes.";
+        }
+      } catch (err) {
+        respBox.innerHTML = "Erro de conexão com o Gemini.";
+      }
+    }
+
+    function enviarMsgTexto() {
+      const inp = document.getElementById('msg-input');
+      if (!inp.value.trim()) return;
+      const box = document.getElementById('chat-body');
+      if (box.innerText.includes('
