@@ -72,7 +72,9 @@
     .team-card.admin { border-left-color: #002288; background: #f0f4ff; }
     .team-card strong { color: #002288; font-size: 0.9rem; display: block; margin-bottom: 2px; }
 
-    .frame-agenda { width: 100%; height: 320px; border: none; border-radius: 8px; }
+    /* AGENDA VISÍVEL E EM DESTAQUE */
+    .card-agenda-destaque { border: 2px solid #002288; transition: all 0.3s ease; }
+    .frame-agenda { width: 100%; height: 450px; border: none; border-radius: 8px; background: #ffffff; }
     .audit-box { max-height: 180px; overflow-y: auto; font-size: 0.8rem; background: #f8fafc; padding: 8px; border-radius: 6px; }
   </style>
 </head>
@@ -86,9 +88,20 @@
   <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA -->
   <div class="card">
     <h3>🤖 Assistente Virtual & Busca IA (Gemini UAEPA)</h3>
-    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte qualquer coisa sobre rotinas, e-mails, equipamentos..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
+    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Digite 'compromissos de hoje', 'agenda' ou dúvidas..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
     <button onclick="consultarGeminiIA()" class="btn-busca-ia">🔍 Consultar Assistente</button>
     <div id="resposta-ia" class="resposta-ia-box"></div>
+  </div>
+
+  <!-- 📅 AGENDA DE SALAS - EM DESTAQUE PRINCIPAL -->
+  <div class="card card-agenda-destaque" id="secao-agenda">
+    <h3>📅 Agenda de Eventos & Salas (InCor HCFMUSP)</h3>
+    <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&ctz=America%2FSao_Paulo&mode=AGENDA"></iframe>
+    
+    <div style="margin-top: 10px;">
+      <strong>📜 Auditoria de Modificações:</strong>
+      <div id="audit-log" class="audit-box" style="margin-top: 4px;">Somente fabio.martins@hc.fm.usp.br pode alterar registros. Verificação diária de salas programada para as 16h30.</div>
+    </div>
   </div>
 
   <!-- 💬 CHAT REAL MENSAGENS E PTT -->
@@ -102,4 +115,8 @@
       </div>
 
       <div id="chat-body" class="chat-body">
-        <div style="text-align: center; color: #888; font-
+        <div style="text-align: center; color: #888; font-size: 0.8rem; padding: 20px;">Inicie a conversa enviando uma mensagem...</div>
+      </div>
+
+      <!-- POPUP @ MENÇÃO (INTEGRANTES) -->
+      <div id="popup-mencoes" class="popup-at">
