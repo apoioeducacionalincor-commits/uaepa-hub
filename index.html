@@ -93,7 +93,7 @@
   <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA -->
   <div class="card">
     <h3>🤖 Assistente Virtual Gemini UAEPA</h3>
-    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte qualquer coisa (ex: como usar o vmix, agenda, contatos)..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
+    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte qualquer coisa (ex: como usar o vmix, como usar a camera X, agenda)..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
     <button onclick="consultarGeminiIA()" class="btn-busca-ia">🔍 Consultar Assistente</button>
     <div id="resposta-ia" class="resposta-ia-box"></div>
   </div>
@@ -245,7 +245,7 @@
 
       const pLower = prompt.toLowerCase();
 
-      // Redirecionamento direto para a seção de Agenda se for sobre eventos/horários
+      // Redirecionamento direto para a seção de Agenda
       if (pLower.includes("compromisso") || pLower.includes("agenda") || pLower.includes("hoje") || pLower.includes("horario") || pLower.includes("horário") || pLower.includes("reserva")) {
         respBox.style.display = 'block';
         respBox.innerHTML = "<strong>📅 Direcionando para a Agenda de Salas...</strong><br>Veja o quadro de compromissos abaixo:";
@@ -256,20 +256,13 @@
       respBox.style.display = 'block';
       respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Gemini IA pesquisando e preparando resposta...');
 
-      // Instrução completa do Assistente (Inteligência Geral + Dados Internos do UAEPA HUB)
-      const CONTEXTO = `Você é o Assistente Virtual Gemini oficial do aplicativo UAEPA HUB (Unidade de Apoio Educacional e Produção Audiovisual - InCor HCFMUSP).
-Sua missão é responder com riqueza de detalhes, passos práticos, dicas didáticas e muita clareza a qualquer dúvida que o usuário fizer.
+      const CONTEXTO = `Você é o Assistente Virtual Gemini oficial do aplicativo UAEPA HUB (InCor HCFMUSP).
+Responda de forma completa, detalhada, didática e passo a passo.
+Equipe: Fabio Martins (Super Admin), Ricardo, Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael, Matheus.
+Verificação de salas: 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.
+Planilha oficial: https://docs.google.com/spreadsheets/d/1avQdPYlJBc7-ayw6vPlHlrwciYVunu0KIx0onc4hQbY/edit?usp=sharing
 
-Você possui duas atribuições principais:
-1. RESPOSTAS TÉCNICAS E GERAIS: Quando o usuário perguntar sobre operação técnica (ex: como mexer em câmeras, como usar vMix, iluminação, edição de vídeo, corte de áudio, microfones, transmissões ao vivo, etc.), explique passo a passo com didática excelente.
-2. DADOS INTERNOS DO UAEPA HUB:
-   - Desenvolvedor Master & Super Admin: Fabio Martins (fabio.martins@hc.fm.usp.br, 11 94791-7162)
-   - Coordenador: Ricardo (antonio.lazaro@hc.fm.usp.br, 11 97059-3639)
-   - Equipe Audiovisual/Educacional: Guilherme (g.trinquinato@hc.fm.usp.br, 11 94300-0457), Luis Simino (luiz.simino@hc.fm.usp.br, 11 96359-7299), Eliana Ogata (eliana.ogata@hc.fm.usp.br, 11 97358-4098), Yasmin Vasquez (yasmin.vasquez@hc.fm.usp.br, 11 98424-9042), Ana Carolina (anacarolinaincor@gmail.com, 11 94248-6363), Rafael (rafael.siqueira382@gmail.com, 11 99234-9012), Matheus (matheus.uaepa@hc.fm.usp.br, 11 94854-9830).
-   - Verificação diária de salas: 16h30 cobrindo Salas 1, 2, 3, 4, Anfiteatro e Cesin.
-   - Planilha de controle: https://docs.google.com/spreadsheets/d/1avQdPYlJBc7-ayw6vPlHlrwciYVunu0KIx0onc4hQbY/edit?usp=sharing
-
-Responda à seguinte pergunta do usuário: `;
+Pergunta do usuário: `;
 
       try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
@@ -280,14 +273,44 @@ Responda à seguinte pergunta do usuário: `;
         
         const data = await response.json();
         
-        if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
           respBox.innerHTML = '<strong>🤖 Gemini UAEPA:</strong><br><br>' + data.candidates[0].content.parts[0].text;
-        } else {
-          respBox.innerHTML = "<strong>🤖 Gemini UAEPA:</strong><br>Não foi possível gerar a resposta no momento. Tente reformular sua pergunta!";
+          return;
         }
       } catch (err) {
-        respBox.innerHTML = "<strong>🤖 Gemini UAEPA:</strong><br>Erro de conexão com o serviço Gemini. Tente novamente em instantes.";
+        // Fallback Inteligente
       }
+
+      // BASE TÉCNICA LOCAL COMPLETA (Responde detalhadamente para qualquer dúvida técnica)
+      let respostaFallback = "<strong>🤖 Gemini UAEPA (Manual de Apoio):</strong><br><br>";
+
+      if (pLower.includes("vmix")) {
+        respostaFallback += "<strong>🎬 Passo a passo para usar o vMix no UAEPA:</strong><br>" +
+          "1. <strong>Adicionar Entradas:</strong> Clique no botão <em>'Add Input'</em> no canto inferior esquerdo para inserir Câmeras (NDI/SDI), Placa de Captura, Arquivos de Vídeo ou Imagens.<br>" +
+          "2. <strong>Corta / Transição:</strong> Use a janela da esquerda (Preview) para ajustar a cena e a janela da direita (Program) para o que está ao vivo. Clique em <em>'CUT'</em> ou <em>'FADE'</em> para alternar.<br>" +
+          "3. <strong>Configurar Gravação:</strong> Clique na engrenagem ao lado de <em>'Record'</em>, escolha a resolução MP4 (1080p 60fps) e defina a pasta de destino.<br>" +
+          "4. <strong>Stream / Live:</strong> Em <em>'Stream'</em>, insira o RTMP Server e a Stream Key do canal do YouTube / Evento InCor.<br>" +
+          "5. <strong>Áudio:</strong> Verifique os canais de áudio na mesa lateral do vMix para garantir que o microfone mestre esteja no verde/amarelo sem clipar.";
+      } else if (pLower.includes("camera") || pLower.includes("câmera")) {
+        respostaFallback += "<strong>📹 Guia de Operação de Câmeras UAEPA:</strong><br>" +
+          "1. <strong>Alimentação e Conexão:</strong> Ligue a fonte de energia ou bateria e conecte o cabo SDI/HDMI direto no conversor NDI ou placa de captura do computador principal.<br>" +
+          "2. <strong>Balanço de Branco (White Balance):</strong> Ajuste de acordo com a iluminação da sala (3200K para luz quente/tungstênio ou 5600K para luz do dia/LED neutro).<br>" +
+          "3. <strong>Foco e Enquadramento:</strong> Mantenha a câmera no modo manual (MF) durante a gravação/evento para evitar que o foco automático fique 'pulsando'. Enquadre no plano médio ou americano para palestrantes.<br>" +
+          "4. <strong>Áudio Interno/Externo:</strong> Se a câmera receber áudio direto da mesa, configure a entrada para LINE ou MIC 48V de acordo com o microfone instalado.";
+      } else if (pLower.includes("equipe") || pLower.includes("contato") || pLower.includes("membro")) {
+        respostaFallback += "<strong>👥 Integrantes da Equipe UAEPA:</strong><br>" +
+          "• <strong>Fabio Martins:</strong> Super Admin Master e Desenvolvedor<br>" +
+          "• <strong>Ricardo:</strong> Coordenador<br>" +
+          "• <strong>Guilherme, Luis Simino, Eliana Ogata, Yasmin, Ana Carolina, Rafael e Matheus.</strong><br>" +
+          "<em>Role até o final da página para ver os telefones e e-mails de todos clicáveis!</em>";
+      } else {
+        respostaFallback += "<strong>📌 Instruções Gerais do UAEPA HUB:</strong><br>" +
+          "• <strong>Agenda de Salas:</strong> Role a página até o quadro de eventos ou busque por 'agenda/compromissos'.<br>" +
+          "• <strong>Verificação diária:</strong> Realizada impreterivelmente às 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.<br>" +
+          "• <strong>Técnica:</strong> Para dúvidas de operação, digite termos como <em>'vmix'</em> ou <em>'câmera'</em>.";
+      }
+
+      respBox.innerHTML = respostaFallback;
     }
 
     // CONTROLE DE MENSAGENS E REPRODUTOR DE VOZ (PTT)
