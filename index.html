@@ -25,9 +25,11 @@
     .badge-master { background: #002288; color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; display: inline-block; }
     .badge-user { background: #64748b; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.65rem; font-weight: normal; display: inline-block; margin-top: 2px; }
 
-    /* LINKS CLICÁVEIS DE CONTATO */
-    .contact-link { color: #002288; text-decoration: none; font-weight: 600; word-break: break-all; }
+    /* LINKS CLICÁVEIS DE CONTATO COM SUPORTE A WHATSAPP */
+    .contact-link { color: #002288; text-decoration: none; font-weight: 600; word-break: break-all; cursor: pointer; }
     .contact-link:hover { text-decoration: underline; color: #0055ff; }
+    .wa-link { color: #25D366; text-decoration: none; font-weight: bold; margin-left: 4px; }
+    .wa-link:hover { text-decoration: underline; }
 
     /* CHAT WHATSAPP COM PTT E ÁUDIO */
     .chat-box { background: #efeae2; border-radius: 10px; height: 420px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; }
@@ -93,7 +95,7 @@
   <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA -->
   <div class="card">
     <h3>🤖 Assistente Virtual Gemini UAEPA</h3>
-    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte qualquer coisa (ex: como usar o vmix, como usar a camera X, agenda)..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
+    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte qualquer coisa (ex: como usar o vmix, como mexer na câmera, agenda)..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
     <button onclick="consultarGeminiIA()" class="btn-busca-ia">🔍 Consultar Assistente</button>
     <div id="resposta-ia" class="resposta-ia-box"></div>
   </div>
@@ -137,62 +139,62 @@
     </div>
   </div>
 
-  <!-- 👥 EQUIPE COM LINKS CLICÁVEIS E TELEFONES -->
+  <!-- 👥 EQUIPE COM LINKS TELEFONE + WHATSAPP -->
   <div class="card">
     <h3>👥 Equipe e Controle de Acesso</h3>
     <div class="team-grid">
       <div class="team-card admin">
         <strong>👑 Fabio Martins</strong>
         📧 <a class="contact-link" href="mailto:fabio.martins@hc.fm.usp.br">fabio.martins@hc.fm.usp.br</a><br>
-        📞 <a class="contact-link" href="tel:+5511947917162">(11) 94791-7162</a><br>
+        📞 <a class="contact-link" href="tel:+5511947917162">(11) 94791-7162</a> <a class="wa-link" href="https://wa.me/5511947917162" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-master">SUPER ADMIN (Desenvolvedor)</span>
       </div>
       <div class="team-card">
         <strong>👤 Ricardo</strong>
         📧 <a class="contact-link" href="mailto:antonio.lazaro@hc.fm.usp.br">antonio.lazaro@hc.fm.usp.br</a><br>
-        📞 <a class="contact-link" href="tel:+5511970593639">(11) 97059-3639</a><br>
+        📞 <a class="contact-link" href="tel:+5511970593639">(11) 97059-3639</a> <a class="wa-link" href="https://wa.me/5511970593639" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Coordenador / Uso</span>
       </div>
       <div class="team-card">
         <strong>👤 Guilherme</strong>
         📧 <a class="contact-link" href="mailto:g.trinquinato@hc.fm.usp.br">g.trinquinato@hc.fm.usp.br</a><br>
-        📞 <a class="contact-link" href="tel:+5511943000457">(11) 94300-0457</a><br>
+        📞 <a class="contact-link" href="tel:+5511943000457">(11) 94300-0457</a> <a class="wa-link" href="https://wa.me/5511943000457" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Luis Simino</strong>
         📧 <a class="contact-link" href="mailto:luiz.simino@hc.fm.usp.br">luiz.simino@hc.fm.usp.br</a><br>
-        📞 <a class="contact-link" href="tel:+5511963597299">(11) 96359-7299</a><br>
+        📞 <a class="contact-link" href="tel:+5511963597299">(11) 96359-7299</a> <a class="wa-link" href="https://wa.me/5511963597299" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Eliana Ogata</strong>
         📧 <a class="contact-link" href="mailto:eliana.ogata@hc.fm.usp.br">eliana.ogata@hc.fm.usp.br</a><br>
-        📞 <a class="contact-link" href="tel:+5511973584098">(11) 97358-4098</a><br>
+        📞 <a class="contact-link" href="tel:+5511973584098">(11) 97358-4098</a> <a class="wa-link" href="https://wa.me/5511973584098" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Yasmin Vasquez</strong>
         📧 <a class="contact-link" href="mailto:yasmin.vasquez@hc.fm.usp.br">yasmin.vasquez@hc.fm.usp.br</a><br>
-        📞 <a class="contact-link" href="tel:+5511984249042">(11) 98424-9042</a><br>
+        📞 <a class="contact-link" href="tel:+5511984249042">(11) 98424-9042</a> <a class="wa-link" href="https://wa.me/5511984249042" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Jovem Aprendiz</span>
       </div>
       <div class="team-card">
         <strong>👤 Ana Carolina</strong>
         📧 <a class="contact-link" href="mailto:anacarolinaincor@gmail.com">anacarolinaincor@gmail.com</a><br>
-        📞 <a class="contact-link" href="tel:+5511942486363">(11) 94248-6363</a><br>
+        📞 <a class="contact-link" href="tel:+5511942486363">(11) 94248-6363</a> <a class="wa-link" href="https://wa.me/5511942486363" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">UAETT InCor</span>
       </div>
       <div class="team-card">
         <strong>👤 Rafael</strong>
         📧 <a class="contact-link" href="mailto:rafael.siqueira382@gmail.com">rafael.siqueira382@gmail.com</a><br>
-        📞 <a class="contact-link" href="tel:+5511992349012">(11) 99234-9012</a><br>
+        📞 <a class="contact-link" href="tel:+5511992349012">(11) 99234-9012</a> <a class="wa-link" href="https://wa.me/5511992349012" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Matheus</strong>
         📧 <a class="contact-link" href="mailto:matheus.uaepa@hc.fm.usp.br">matheus.uaepa@hc.fm.usp.br</a><br>
-        📞 <a class="contact-link" href="tel:+5511948549830">(11) 94854-9830</a><br>
+        📞 <a class="contact-link" href="tel:+5511948549830">(11) 94854-9830</a> <a class="wa-link" href="https://wa.me/5511948549830" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Audiovisual UAEPA | Uso / Chat</span>
       </div>
     </div>
@@ -201,7 +203,7 @@
   <!-- RODAPÉ DE CRÉDITOS DO DESENVOLVEDOR MASTER -->
   <div class="footer-dev">
     <span class="badge-master">SUPER ADMIN MASTER & DESENVOLVEDOR</span><br>
-    <strong>Fabio Martins</strong> | 📧 <a class="contact-link" href="mailto:fabio.martins@hc.fm.usp.br">fabio.martins@hc.fm.usp.br</a> | 📞 <a class="contact-link" href="tel:+5511947917162">(11) 94791-7162</a><br>
+    <strong>Fabio Martins</strong> | 📧 <a class="contact-link" href="mailto:fabio.martins@hc.fm.usp.br">fabio.martins@hc.fm.usp.br</a> | 📞 <a class="contact-link" href="tel:+5511947917162">(11) 94791-7162</a> <a class="wa-link" href="https://wa.me/5511947917162" target="_blank">💬 WhatsApp</a><br>
     UAEPA HUB - Unidade de Apoio Educacional e Produção Audiovisual (InCor - HCFMUSP)
   </div>
 
@@ -245,7 +247,7 @@
 
       const pLower = prompt.toLowerCase();
 
-      // Redirecionamento direto para a seção de Agenda
+      // Redirecionamento automático para a Agenda
       if (pLower.includes("compromisso") || pLower.includes("agenda") || pLower.includes("hoje") || pLower.includes("horario") || pLower.includes("horário") || pLower.includes("reserva")) {
         respBox.style.display = 'block';
         respBox.innerHTML = "<strong>📅 Direcionando para a Agenda de Salas...</strong><br>Veja o quadro de compromissos abaixo:";
@@ -254,63 +256,66 @@
       }
 
       respBox.style.display = 'block';
-      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Gemini IA pesquisando e preparando resposta...');
+      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Assistente Gemini pesquisando...');
 
-      const CONTEXTO = `Você é o Assistente Virtual Gemini oficial do aplicativo UAEPA HUB (InCor HCFMUSP).
-Responda de forma completa, detalhada, didática e passo a passo.
+      const CONTEXTO = `Você é o Assistente Virtual Gemini do UAEPA HUB (InCor HCFMUSP).
+Responda de forma completa, detalhada, didática e passo a passo em português a qualquer pergunta do usuário.
 Equipe: Fabio Martins (Super Admin), Ricardo, Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael, Matheus.
-Verificação de salas: 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.
-Planilha oficial: https://docs.google.com/spreadsheets/d/1avQdPYlJBc7-ayw6vPlHlrwciYVunu0KIx0onc4hQbY/edit?usp=sharing
 
 Pergunta do usuário: `;
 
-      try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ contents: [{ parts: [{ text: CONTEXTO + prompt }] }] })
-        });
-        
-        const data = await response.json();
-        
-        if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
-          respBox.innerHTML = '<strong>🤖 Gemini UAEPA:</strong><br><br>' + data.candidates[0].content.parts[0].text;
-          return;
+      // Tentativa via modelos ativos (2.5-flash e 3.8-flash)
+      const endpoints = [
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${GEMINI_API_KEY}`
+      ];
+
+      for (let url of endpoints) {
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: [{ parts: [{ text: CONTEXTO + prompt }] }] })
+          });
+          const data = await response.json();
+          if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
+            respBox.innerHTML = '<strong>🤖 Assistente Gemini UAEPA:</strong><br><br>' + data.candidates[0].content.parts[0].text;
+            return;
+          }
+        } catch (e) {
+          console.warn("Tentando endpoint secundário...");
         }
-      } catch (err) {
-        // Fallback Inteligente
       }
 
-      // BASE TÉCNICA LOCAL COMPLETA (Responde detalhadamente para qualquer dúvida técnica)
-      let respostaFallback = "<strong>🤖 Gemini UAEPA (Manual de Apoio):</strong><br><br>";
+      // RESPOSTA DE CONHECIMENTO TÉCNICO COMPLETA (Caso a API não responda)
+      let resp = "<strong>🤖 Assistente Gemini UAEPA (Manual Didático):</strong><br><br>";
 
       if (pLower.includes("vmix")) {
-        respostaFallback += "<strong>🎬 Passo a passo para usar o vMix no UAEPA:</strong><br>" +
-          "1. <strong>Adicionar Entradas:</strong> Clique no botão <em>'Add Input'</em> no canto inferior esquerdo para inserir Câmeras (NDI/SDI), Placa de Captura, Arquivos de Vídeo ou Imagens.<br>" +
-          "2. <strong>Corta / Transição:</strong> Use a janela da esquerda (Preview) para ajustar a cena e a janela da direita (Program) para o que está ao vivo. Clique em <em>'CUT'</em> ou <em>'FADE'</em> para alternar.<br>" +
-          "3. <strong>Configurar Gravação:</strong> Clique na engrenagem ao lado de <em>'Record'</em>, escolha a resolução MP4 (1080p 60fps) e defina a pasta de destino.<br>" +
-          "4. <strong>Stream / Live:</strong> Em <em>'Stream'</em>, insira o RTMP Server e a Stream Key do canal do YouTube / Evento InCor.<br>" +
-          "5. <strong>Áudio:</strong> Verifique os canais de áudio na mesa lateral do vMix para garantir que o microfone mestre esteja no verde/amarelo sem clipar.";
+        resp += "<strong>🎬 Como operar o vMix no UAEPA:</strong><br>" +
+          "1. <strong>Inserir Fontes:</strong> Clique em <em>'Add Input'</em> (canto inferior esquerdo) e selecione a Câmera, Placa de Captura, Vídeo ou Imagem.<br>" +
+          "2. <strong>Corte de Cena:</strong> A tela da esquerda é o <em>Preview</em> e a da direita é o <em>Program</em> (Live). Clique em <strong>CUT</strong> para trocar instantaneamente ou <strong>FADE</strong> para transição suave.<br>" +
+          "3. <strong>Gravação:</strong> Abra as configurações ao lado de <em>'Record'</em>, defina MP4 (1080p) e salve na pasta de trabalho do evento.<br>" +
+          "4. <strong>Áudio:</strong> Verifique o Master Audio na lateral direita para manter o som dentro da faixa verde/amarela.";
       } else if (pLower.includes("camera") || pLower.includes("câmera")) {
-        respostaFallback += "<strong>📹 Guia de Operação de Câmeras UAEPA:</strong><br>" +
-          "1. <strong>Alimentação e Conexão:</strong> Ligue a fonte de energia ou bateria e conecte o cabo SDI/HDMI direto no conversor NDI ou placa de captura do computador principal.<br>" +
-          "2. <strong>Balanço de Branco (White Balance):</strong> Ajuste de acordo com a iluminação da sala (3200K para luz quente/tungstênio ou 5600K para luz do dia/LED neutro).<br>" +
-          "3. <strong>Foco e Enquadramento:</strong> Mantenha a câmera no modo manual (MF) durante a gravação/evento para evitar que o foco automático fique 'pulsando'. Enquadre no plano médio ou americano para palestrantes.<br>" +
-          "4. <strong>Áudio Interno/Externo:</strong> Se a câmera receber áudio direto da mesa, configure a entrada para LINE ou MIC 48V de acordo com o microfone instalado.";
-      } else if (pLower.includes("equipe") || pLower.includes("contato") || pLower.includes("membro")) {
-        respostaFallback += "<strong>👥 Integrantes da Equipe UAEPA:</strong><br>" +
-          "• <strong>Fabio Martins:</strong> Super Admin Master e Desenvolvedor<br>" +
-          "• <strong>Ricardo:</strong> Coordenador<br>" +
-          "• <strong>Guilherme, Luis Simino, Eliana Ogata, Yasmin, Ana Carolina, Rafael e Matheus.</strong><br>" +
-          "<em>Role até o final da página para ver os telefones e e-mails de todos clicáveis!</em>";
+        resp += "<strong>📹 Como operar as Câmeras no UAEPA:</strong><br>" +
+          "1. <strong>Energia e Sinal:</strong> Ligue a fonte/bateria e conecte a saída SDI/HDMI na placa de captura ou conversor NDI.<br>" +
+          "2. <strong>Balanço de Branco:</strong> Ajuste manualmente (3200K para iluminação quente ou 5600K para LED neutro).<br>" +
+          "3. <strong>Foco Manual:</strong> Deixe o anel da lente em <em>Manual Focus (MF)</em> para evitar variação automática durante a gravação.<br>" +
+          "4. <strong>Enquadramento:</strong> Utilize enquadramento no plano médio/americano para palestrantes em anfiteatros e salas.";
+      } else if (pLower.includes("equipe") || pLower.includes("membro") || pLower.includes("contato")) {
+        resp += "<strong>👥 Integrantes da Equipe UAEPA:</strong><br>" +
+          "• Fabio Martins (Super Admin e Desenvolvedor)<br>" +
+          "• Ricardo (Coordenador)<br>" +
+          "• Guilherme, Luis Simino, Eliana Ogata, Yasmin, Ana Carolina, Rafael e Matheus.<br>" +
+          "<em>Consulte o quadro ao final da página para discar ou chamar no WhatsApp em 1 clique!</em>";
       } else {
-        respostaFallback += "<strong>📌 Instruções Gerais do UAEPA HUB:</strong><br>" +
-          "• <strong>Agenda de Salas:</strong> Role a página até o quadro de eventos ou busque por 'agenda/compromissos'.<br>" +
-          "• <strong>Verificação diária:</strong> Realizada impreterivelmente às 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.<br>" +
-          "• <strong>Técnica:</strong> Para dúvidas de operação, digite termos como <em>'vmix'</em> ou <em>'câmera'</em>.";
+        resp += "<strong>📌 Instruções Gerais do UAEPA HUB:</strong><br>" +
+          "• Para dúvidas de <strong>Agenda ou Horários</strong>, digite <em>'agenda'</em> ou <em>'compromissos de hoje'</em>.<br>" +
+          "• A ronda de verificação de salas ocorre diariamente às <strong>16h30</strong> nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.<br>" +
+          "• Para orientações de streaming, digite <em>'vmix'</em> ou <em>'câmera'</em>.";
       }
 
-      respBox.innerHTML = respostaFallback;
+      respBox.innerHTML = resp;
     }
 
     // CONTROLE DE MENSAGENS E REPRODUTOR DE VOZ (PTT)
