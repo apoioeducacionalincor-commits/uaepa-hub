@@ -191,9 +191,9 @@
       </div>
       <div class="team-card">
         <strong>👤 Matheus</strong>
-        Audiovisual UAEPA<br>
+        📧 <a class="contact-link" href="mailto:matheus.uaepa@hc.fm.usp.br">matheus.uaepa@hc.fm.usp.br</a><br>
         📞 <a class="contact-link" href="tel:+5511948549830">(11) 94854-9830</a><br>
-        <span class="badge-user">Uso / Chat</span>
+        <span class="badge-user">Audiovisual UAEPA | Uso / Chat</span>
       </div>
     </div>
   </div>
@@ -255,14 +255,14 @@
       respBox.style.display = 'block';
       respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Gemini IA pesquisando no acervo UAEPA...');
 
-      const CONTEXTO = `Você é a IA do app UAEPA HUB (InCor HCFMUSP).
-Responda qualquer dúvida do usuário com clareza e precisão.
-Dados do UAEPA:
+      const CONTEXTO = `Você é o Assistente Virtual do UAEPA HUB (InCor - HCFMUSP).
+Responda qualquer dúvida com objetividade e clareza.
+Dados atualizados do UAEPA:
 - Super Admin e Desenvolvedor Master: Fabio Martins (fabio.martins@hc.fm.usp.br, 11 94791-7162)
 - Coordenador: Ricardo (antonio.lazaro@hc.fm.usp.br, 11 97059-3639)
-- Equipe: Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael (11 99234-9012), Matheus (11 94854-9830).
-- Verificação de salas: 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.
-- Planilha oficial: https://docs.google.com/spreadsheets/d/1avQdPYlJBc7-ayw6vPlHlrwciYVunu0KIx0onc4hQbY/edit?usp=sharing
+- Integrantes da Equipe: Guilherme (g.trinquinato@hc.fm.usp.br, 11 94300-0457), Luis Simino (luiz.simino@hc.fm.usp.br, 11 96359-7299), Eliana Ogata (eliana.ogata@hc.fm.usp.br, 11 97358-4098), Yasmin Vasquez (yasmin.vasquez@hc.fm.usp.br, 11 98424-9042), Ana Carolina (anacarolinaincor@gmail.com, 11 94248-6363), Rafael (rafael.siqueira382@gmail.com, 11 99234-9012), Matheus (matheus.uaepa@hc.fm.usp.br, 11 94854-9830).
+- Verificação diária de salas: 16h30 cobrindo Salas 1, 2, 3, 4, Anfiteatro e Cesin.
+- Planilha de gravações/edições: https://docs.google.com/spreadsheets/d/1avQdPYlJBc7-ayw6vPlHlrwciYVunu0KIx0onc4hQbY/edit?usp=sharing
 
 Pergunta: `;
 
@@ -272,14 +272,16 @@ Pergunta: `;
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ contents: [{ parts: [{ text: CONTEXTO + prompt }] }] })
         });
+        
         const data = await response.json();
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
+        
+        if (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
           respBox.innerHTML = '<strong>🤖 Gemini UAEPA:</strong><br><br>' + data.candidates[0].content.parts[0].text;
         } else {
-          respBox.innerHTML = "A IA está processando. Tente novamente em instantes.";
+          respBox.innerHTML = "<strong>📌 Resposta Local UAEPA HUB:</strong><br>Recebi sua pergunta: <em>'" + prompt + "'</em>.<br><br>💡 Se for sobre a agenda de salas, digite <strong>'compromissos de hoje'</strong>!";
         }
       } catch (err) {
-        respBox.innerHTML = "Erro de conexão com o Gemini.";
+        respBox.innerHTML = "<strong>📌 Resposta Assistente UAEPA:</strong><br>Não foi possível conectar ao servidor externo no momento.<br><br>💡 Digite <strong>'compromissos de hoje'</strong> para ir direto para a agenda de eventos!";
       }
     }
 
