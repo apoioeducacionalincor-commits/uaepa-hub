@@ -25,6 +25,10 @@
     .badge-master { background: #002288; color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; display: inline-block; }
     .badge-user { background: #64748b; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.65rem; font-weight: normal; display: inline-block; margin-top: 2px; }
 
+    /* LINKS CLICÁVEIS DE CONTATO */
+    .contact-link { color: #002288; text-decoration: none; font-weight: 600; word-break: break-all; }
+    .contact-link:hover { text-decoration: underline; color: #0055ff; }
+
     /* CHAT WHATSAPP COM PTT E ÁUDIO */
     .chat-box { background: #efeae2; border-radius: 10px; height: 420px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; }
     .chat-top { background: #075e54; color: white; padding: 10px 14px; font-weight: bold; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
@@ -40,14 +44,13 @@
     .chat-controls { display: flex; padding: 8px; background: #f0f2f5; gap: 6px; align-items: center; border-top: 1px solid #d1d7db; position: relative; }
     .input-chat { flex: 1; padding: 10px 12px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.9rem; outline: none; background: #ffffff; }
     
-    /* BOTÃO PTT E GRAVADOR DE VOZ */
     .btn-ptt-mic { width: 42px; height: 42px; border-radius: 50%; background: #00a884; color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none; transition: background-color 0.2s ease, transform 0.2s ease; }
     .btn-ptt-mic.recording { background: #cc0011 !important; animation: pulse 1s infinite; transform: scale(1.1); }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
     
     .btn-send { width: 42px; height: 42px; border-radius: 50%; background: #002288; color: white; border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-    /* POPUP DE @ MENÇÃO */
+    /* POPUP DE @ MENÇÕES */
     .popup-at { position: absolute; bottom: 60px; left: 10px; right: 10px; background: white; border-radius: 8px; border: 1px solid #ccc; display: none; box-shadow: 0 -4px 10px rgba(0,0,0,0.15); z-index: 10; max-height: 200px; overflow-y: auto; }
     .popup-item { padding: 8px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #eee; }
     .popup-item:hover { background: #f0f4ff; }
@@ -69,12 +72,15 @@
 
     /* LISTA DE MEMBROS */
     .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 8px; }
-    .team-card { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #002288; border-radius: 8px; padding: 10px; font-size: 0.82rem; line-height: 1.4; }
+    .team-card { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #002288; border-radius: 8px; padding: 10px; font-size: 0.82rem; line-height: 1.5; }
     .team-card.admin { border-left-color: #002288; background: #f0f4ff; }
     .team-card strong { color: #002288; font-size: 0.9rem; display: block; margin-bottom: 2px; }
 
     .card-agenda-destaque { border: 2px solid #002288; }
     .frame-agenda { width: 100%; height: 450px; border: none; border-radius: 8px; background: #ffffff; }
+    
+    /* RODAPÉ DO DESENVOLVEDOR */
+    .footer-dev { text-align: center; font-size: 0.8rem; color: #475569; margin-top: 20px; padding: 16px; background: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); line-height: 1.6; }
   </style>
 </head>
 <body>
@@ -131,46 +137,70 @@
     </div>
   </div>
 
-  <!-- 👥 EQUIPE -->
+  <!-- 👥 EQUIPE COM LINKS CLICÁVEIS -->
   <div class="card">
     <h3>👥 Equipe e Controle de Acesso</h3>
     <div class="team-grid">
       <div class="team-card admin">
         <strong>👑 Fabio Martins</strong>
-        fabio.martins@hc.fm.usp.br | 📞 (11) 94791-7162<br>
-        <span class="badge-master">SUPER ADMIN</span>
+        📧 <a class="contact-link" href="mailto:fabio.martins@hc.fm.usp.br">fabio.martins@hc.fm.usp.br</a><br>
+        📞 <a class="contact-link" href="tel:+5511947917162">(11) 94791-7162</a><br>
+        <span class="badge-master">SUPER ADMIN (Desenvolvedor)</span>
       </div>
       <div class="team-card">
         <strong>👤 Ricardo</strong>
-        antonio.lazaro@hc.fm.usp.br | 📞 (11) 97059-3639<br>
+        📧 <a class="contact-link" href="mailto:antonio.lazaro@hc.fm.usp.br">antonio.lazaro@hc.fm.usp.br</a><br>
+        📞 <a class="contact-link" href="tel:+5511970593639">(11) 97059-3639</a><br>
         <span class="badge-user">Coordenador / Uso</span>
       </div>
       <div class="team-card">
         <strong>👤 Guilherme</strong>
-        g.trinquinato@hc.fm.usp.br | 📞 (11) 94300-0457<br>
+        📧 <a class="contact-link" href="mailto:g.trinquinato@hc.fm.usp.br">g.trinquinato@hc.fm.usp.br</a><br>
+        📞 <a class="contact-link" href="tel:+5511943000457">(11) 94300-0457</a><br>
         <span class="badge-user">Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Luis Simino</strong>
-        luiz.simino@hc.fm.usp.br | 📞 (11) 96359-7299<br>
+        📧 <a class="contact-link" href="mailto:luiz.simino@hc.fm.usp.br">luiz.simino@hc.fm.usp.br</a><br>
+        📞 <a class="contact-link" href="tel:+5511963597299">(11) 96359-7299</a><br>
         <span class="badge-user">Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Eliana Ogata</strong>
-        eliana.ogata@hc.fm.usp.br | 📞 (11) 97358-4098<br>
+        📧 <a class="contact-link" href="mailto:eliana.ogata@hc.fm.usp.br">eliana.ogata@hc.fm.usp.br</a><br>
+        📞 <a class="contact-link" href="tel:+5511973584098">(11) 97358-4098</a><br>
         <span class="badge-user">Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Yasmin Vasquez</strong>
-        yasmin.vasquez@hc.fm.usp.br | 📞 (11) 98424-9042<br>
+        📧 <a class="contact-link" href="mailto:yasmin.vasquez@hc.fm.usp.br">yasmin.vasquez@hc.fm.usp.br</a><br>
+        📞 <a class="contact-link" href="tel:+5511984249042">(11) 98424-9042</a><br>
         <span class="badge-user">Jovem Aprendiz</span>
       </div>
       <div class="team-card">
         <strong>👤 Ana Carolina</strong>
-        anacarolinaincor@gmail.com | 📞 (11) 94248-6363<br>
+        📧 <a class="contact-link" href="mailto:anacarolinaincor@gmail.com">anacarolinaincor@gmail.com</a><br>
+        📞 <a class="contact-link" href="tel:+5511942486363">(11) 94248-6363</a><br>
         <span class="badge-user">UAETT InCor</span>
       </div>
+      <div class="team-card">
+        <strong>👤 Rafael</strong>
+        📧 <a class="contact-link" href="mailto:rafael.siqueira382@gmail.com">rafael.siqueira382@gmail.com</a><br>
+        <span class="badge-user">Uso / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Matheus</strong>
+        Audiovisual UAEPA<br>
+        <span class="badge-user">Uso / Chat</span>
+      </div>
     </div>
+  </div>
+
+  <!-- RODAPÉ DE CRÉDITOS DO DESENVOLVEDOR MASTER -->
+  <div class="footer-dev">
+    <span class="badge-master">SUPER ADMIN MASTER & DESENVOLVEDOR</span><br>
+    <strong>Fabio Martins</strong> | 📧 <a class="contact-link" href="mailto:fabio.martins@hc.fm.usp.br">fabio.martins@hc.fm.usp.br</a> | 📞 <a class="contact-link" href="tel:+5511947917162">(11) 94791-7162</a><br>
+    UAEPA HUB - Unidade de Apoio Educacional e Produção Audiovisual (InCor - HCFMUSP)
   </div>
 
   <script>
@@ -226,7 +256,7 @@
       const CONTEXTO = `Você é a IA do app UAEPA HUB (InCor HCFMUSP).
 Responda qualquer dúvida do usuário com clareza e precisão.
 Dados do UAEPA:
-- Super Admin: Fabio Martins (fabio.martins@hc.fm.usp.br, 11 94791-7162)
+- Super Admin e Desenvolvedor Master: Fabio Martins (fabio.martins@hc.fm.usp.br, 11 94791-7162)
 - Coordenador: Ricardo (antonio.lazaro@hc.fm.usp.br, 11 97059-3639)
 - Equipe: Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael, Matheus.
 - Verificação de salas: 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.
