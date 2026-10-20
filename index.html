@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>UAEPA HUB - InCor HCFMUSP</title>
   
-  <!-- Ícone Vetorial SVG Embutido HD (Logotipo do UAEPA HUB) -->
+  <!-- Ícone Vetorial SVG Embutido HD -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <meta name="apple-mobile-web-app-title" content="UAEPA HUB">
@@ -23,6 +23,7 @@
     .card h3 { margin-top: 0; color: #002288; font-size: 1rem; border-bottom: 2px solid #f0f3f8; padding-bottom: 6px; margin-bottom: 10px; }
 
     .badge-master { background: #002288; color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; display: inline-block; }
+    .badge-user { background: #64748b; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.65rem; font-weight: normal; display: inline-block; margin-top: 2px; }
 
     /* MENSAGEIRO ESTILO WHATSAPP NATIVO */
     .chat-box { background: #efeae2; border-radius: 10px; height: 380px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; }
@@ -54,7 +55,7 @@
     .btn-busca-ia { width: 100%; padding: 10px; background: #002288; color: white; font-weight: bold; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer; }
     .resposta-ia-box { margin-top: 10px; padding: 12px; background: #f0f4ff; border-left: 4px solid #002288; border-radius: 8px; font-size: 0.88rem; display: none; line-height: 1.4; }
 
-    /* LOADER ANIMADO DO ÍCONE UAEPA HUB QUE GIRA AO PESQUISAR/SINCRO */
+    /* LOADER ANIMADO */
     .uaepa-loader-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; width: 100%; box-sizing: border-box; }
     .uaepa-loader-container.size-36 .uaepa-loader { width: 36px; height: 36px; }
     .uaepa-loader-container.size-64 .uaepa-loader { width: 64px; height: 64px; }
@@ -66,8 +67,9 @@
     .uaepa-loader-text { margin-top: 8px; font-size: 0.82rem; font-weight: bold; color: #002288; text-align: center; }
 
     /* LISTA DE MEMBROS DA EQUIPE */
-    .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-top: 8px; }
-    .team-card { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #002288; border-radius: 8px; padding: 10px; font-size: 0.82rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 8px; }
+    .team-card { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #002288; border-radius: 8px; padding: 10px; font-size: 0.82rem; line-height: 1.4; }
+    .team-card.admin { border-left-color: #002288; background: #f0f4ff; }
     .team-card strong { color: #002288; font-size: 0.9rem; display: block; margin-bottom: 2px; }
 
     .frame-agenda { width: 100%; height: 320px; border: none; border-radius: 8px; }
@@ -81,7 +83,7 @@
     <p>Unidade de Apoio Educacional e Produção Audiovisual (InCor - HCFMUSP)</p>
   </div>
 
-  <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA COM PESQUISA E ÍCONE GIRATÓRIO -->
+  <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA -->
   <div class="card">
     <h3>🤖 Assistente Virtual & Busca IA (Gemini)</h3>
     <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte sobre rotinas de salas, manuais ou equipamentos..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
@@ -96,20 +98,24 @@
     <div class="chat-box">
       <div class="chat-top">
         <span>👥 Conversa em Tempo Real</span>
-        <span id="user-display" style="font-size: 0.75rem; opacity: 0.9;">Fabio Martins</span>
+        <span id="user-display" style="font-size: 0.75rem; opacity: 0.9;">Fabio Martins (Admin)</span>
       </div>
 
       <div id="chat-body" class="chat-body">
         <div style="text-align: center; color: #888; font-size: 0.8rem; padding: 20px;">Inicie a conversa enviando uma mensagem...</div>
       </div>
 
-      <!-- POPUP @ MENÇÃO (MEMBROS ÚNICOS SEM DUPLICIDADE) -->
+      <!-- POPUP @ MENÇÃO (INTEGRANTES) -->
       <div id="popup-mencoes" class="popup-at">
         <div class="popup-item" onclick="inserirTag('@Fabio Martins')">👑 @Fabio Martins (Super Admin)</div>
-        <div class="popup-item" onclick="inserirTag('@Matheus')">👤 @Matheus (Audiovisual)</div>
-        <div class="popup-item" onclick="inserirTag('@Guilherme')">👤 @Guilherme (Audiovisual)</div>
-        <div class="popup-item" onclick="inserirTag('@Ricardo')">👤 @Ricardo (Equipe UAEPA)</div>
-        <div class="popup-item" onclick="inserirTag('@Rafael')">👤 @Rafael (Equipe UAEPA)</div>
+        <div class="popup-item" onclick="inserirTag('@Ricardo')">👤 @Ricardo</div>
+        <div class="popup-item" onclick="inserirTag('@Guilherme')">👤 @Guilherme</div>
+        <div class="popup-item" onclick="inserirTag('@Luis Simino')">👤 @Luis Simino</div>
+        <div class="popup-item" onclick="inserirTag('@Eliana Ogata')">👤 @Eliana Ogata</div>
+        <div class="popup-item" onclick="inserirTag('@Yasmin Vasquez')">👤 @Yasmin Vasquez</div>
+        <div class="popup-item" onclick="inserirTag('@Ana Carolina')">👤 @Ana Carolina</div>
+        <div class="popup-item" onclick="inserirTag('@Rafael')">👤 @Rafael</div>
+        <div class="popup-item" onclick="inserirTag('@Matheus')">👤 @Matheus</div>
       </div>
 
       <div class="chat-controls">
@@ -120,44 +126,73 @@
     </div>
   </div>
 
-  <!-- 👥 EQUIPE UAEPA - MEMBROS CADASTRADOS -->
+  <!-- 👥 EQUIPE UAEPA - NÍVEIS DE PERMISSÃO -->
   <div class="card">
-    <h3>👥 Equipe e Colaboradores UAEPA</h3>
+    <h3>👥 Equipe e Controle de Acesso</h3>
     <div class="team-grid">
-      <div class="team-card">
+      <div class="team-card admin">
         <strong>👑 Fabio Martins</strong>
         fabio.martins@hc.fm.usp.br<br>
-        📞 (11) 94791-7162
-      </div>
-      <div class="team-card">
-        <strong>👤 Matheus</strong>
-        Audiovisual UAEPA
-      </div>
-      <div class="team-card">
-        <strong>👤 Guilherme</strong>
-        Audiovisual UAEPA
+        📞 (11) 94791-7162<br>
+        <span class="badge-master">SUPER ADMIN (Edição/Inclusão/Exclusão)</span>
       </div>
       <div class="team-card">
         <strong>👤 Ricardo</strong>
-        antonio.lazaro@hc.fm.usp<br>
-        📞 (11) 97059-6339
+        antonio.lazaro@hc.fm.usp.br<br>
+        📞 (11) 97059-3639<br>
+        <span class="badge-user">Uso / Consulta / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Guilherme</strong>
+        g.trinquinato@hc.fm.usp.br<br>
+        📞 (11) 94300-0457<br>
+        <span class="badge-user">Uso / Consulta / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Luis Simino</strong>
+        luiz.simino@hc.fm.usp.br<br>
+        📞 (11) 96359-7299<br>
+        <span class="badge-user">Uso / Consulta / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Eliana Ogata</strong>
+        eliana.ogata@hc.fm.usp.br<br>
+        📞 (11) 97358-4098<br>
+        <span class="badge-user">Uso / Consulta / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Yasmin Vasquez</strong>
+        yasmin.vasquez@hc.fm.usp.br<br>
+        📞 (11) 98424-9042<br>
+        <span class="badge-user">Jovem Aprendiz | Uso / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Ana Carolina</strong>
+        anacarolinaincor@gmail.com<br>
+        📞 (11) 94248-6363<br>
+        <span class="badge-user">UAETT InCor | Uso / Chat</span>
       </div>
       <div class="team-card">
         <strong>👤 Rafael</strong>
         rafael.siqueira382@gmail.com<br>
-        📞 (11) 99234-9012
+        <span class="badge-user">Uso / Consulta / Chat</span>
+      </div>
+      <div class="team-card">
+        <strong>👤 Matheus</strong>
+        Audiovisual UAEPA<br>
+        <span class="badge-user">Uso / Consulta / Chat</span>
       </div>
     </div>
   </div>
 
-  <!-- 📅 AGENDA DE SALAS & AUDITORIA DE MODIFICAÇÕES -->
+  <!-- 📅 AGENDA DE SALAS -->
   <div class="card">
     <h3>📅 Agenda de Eventos & Salas (Verificação 16:30)</h3>
     <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&ctz=America%2FSao_Paulo&mode=AGENDA"></iframe>
     
     <div style="margin-top: 10px;">
-      <strong>📜 Auditoria de Modificações da Agenda:</strong>
-      <div id="audit-log" class="audit-box" style="margin-top: 4px;">Nenhuma alteração de agendamento recente.</div>
+      <strong>📜 Auditoria de Modificações:</strong>
+      <div id="audit-log" class="audit-box" style="margin-top: 4px;">Somente fabio.martins@hc.fm.usp.br pode alterar registros.</div>
     </div>
   </div>
 
@@ -169,7 +204,10 @@
   </div>
 
   <script>
-    // CLASSE PARA EXIBIR O ÍCONE GIRATÓRIO UAEPA HUB
+    // CONTROLE DE PERMISSÕES
+    const USUARIO_ATUAL = "fabio.martins@hc.fm.usp.br";
+    const IS_ADMIN = (USUARIO_ATUAL === "fabio.martins@hc.fm.usp.br");
+
     class UAEPAIconLoader {
       static renderHTML(size = '64', text = '') {
         return `
@@ -184,157 +222,4 @@
                 <circle cx="100" cy="72" r="10" fill="url(#uaepaGradRed)"/>
                 <text x="100" y="148" font-family="sans-serif" font-weight="900" font-size="19" fill="#002288" text-anchor="middle">UAEPA</text>
                 <rect x="68" y="154" width="64" height="16" rx="8" fill="url(#uaepaGradRed)"/>
-                <text x="100" y="166" font-family="sans-serif" font-weight="800" font-size="10" fill="#FFFFFF" text-anchor="middle">HUB</text>
-              </g>
-              <g class="uaepa-loader-ring">
-                <path d="M 100,12 A 88,88 0 0,1 176,56" fill="none" stroke="url(#uaepaGradBlue)" stroke-width="9" stroke-linecap="round"/>
-                <path d="M 188,100 A 88,88 0 0,1 144,176" fill="none" stroke="url(#uaepaGradRed)" stroke-width="9" stroke-linecap="round"/>
-              </g>
-            </svg>
-            ${text ? `<div class="uaepa-loader-text">${text}</div>` : ''}
-          </div>
-        `;
-      }
-    }
-
-    // CONSULTA AO GEMINI IA COM ÍCONE GIRATÓRIO
-    function consultarGeminiIA() {
-      const p = document.getElementById('prompt-ia').value.trim();
-      const respBox = document.getElementById('resposta-ia');
-      if (!p) return;
-
-      respBox.style.display = 'block';
-      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Gemini IA pesquisando no acervo UAEPA...');
-
-      fetch('https://script.google.com/macros/s/AKfycbx_exemplo/exec?action=gemini&prompt=' + encodeURIComponent(p))
-        .then(res => res.text())
-        .then(txt => {
-          respBox.innerHTML = '<strong>🤖 Resposta do Assistente Gemini:</strong><br>' + txt;
-        })
-        .catch(() => {
-          respBox.innerHTML = '<strong>🤖 Assistente Gemini:</strong> As rotinas de inspeção diária das 16h30 cobrem as Salas 1 a 4, Anfiteatro e Cesin. Verifique se o som, projetor e ar-condicionado estão desligados ao encerrar.';
-        });
-    }
-
-    function emitirAlertaNextel() {
-      try {
-        if ("vibrate" in navigator) navigator.vibrate([150, 60, 150]);
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(1800, ctx.currentTime);
-        gain.gain.setValueAtTime(0.2, ctx.currentTime);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.1);
-        setTimeout(() => {
-          const osc2 = ctx.createOscillator();
-          const gain2 = ctx.createGain();
-          osc2.type = 'sine';
-          osc2.frequency.setValueAtTime(2400, ctx.currentTime);
-          gain2.gain.setValueAtTime(0.2, ctx.currentTime);
-          osc2.connect(gain2);
-          gain2.connect(ctx.destination);
-          osc2.start();
-          osc2.stop(ctx.currentTime + 0.15);
-        }, 110);
-      } catch (e) {}
-    }
-
-    function checarArroba(input) {
-      const pop = document.getElementById('popup-mencoes');
-      if (input.value.endsWith('@')) pop.style.display = 'block';
-      else if (!input.value.includes('@')) pop.style.display = 'none';
-    }
-
-    function inserirTag(tag) {
-      const inp = document.getElementById('msg-input');
-      inp.value = inp.value.substring(0, inp.value.lastIndexOf('@')) + tag + ' ';
-      document.getElementById('popup-mencoes').style.display = 'none';
-      inp.focus();
-    }
-
-    let mediaRecorder = null;
-    let chunks = [];
-    let recording = false;
-    const btnPtt = document.getElementById('btn-ptt');
-
-    btnPtt.addEventListener('mousedown', startPtt);
-    btnPtt.addEventListener('mouseup', stopPtt);
-    btnPtt.addEventListener('touchstart', (e) => { e.preventDefault(); startPtt(); }, { passive: false });
-    btnPtt.addEventListener('touchend', (e) => { e.preventDefault(); stopPtt(); }, { passive: false });
-
-    async function startPtt() {
-      if (recording) return;
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
-        chunks = [];
-        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
-        mediaRecorder.start();
-        recording = true;
-        btnPtt.classList.add('recording');
-      } catch (err) {
-        alert('Permita o acesso ao microfone no navegador para enviar áudios PTT.');
-      }
-    }
-
-    function stopPtt() {
-      if (!recording || !mediaRecorder) return;
-      recording = false;
-      btnPtt.classList.remove('recording');
-      mediaRecorder.stop();
-      mediaRecorder.stream.getTracks().forEach(t => t.stop());
-
-      mediaRecorder.onstop = () => {
-        const blob = new Blob(chunks, { type: 'audio/mp3' });
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = () => {
-          adicionarBalaoChat("Fabio Martins", "🎙️ Áudio de Voz PTT", true, reader.result);
-          emitirAlertaNextel();
-        };
-      };
-    }
-
-    function enviarMsgTexto() {
-      const inp = document.getElementById('msg-input');
-      if (!inp.value.trim()) return;
-      adicionarBalaoChat("Fabio Martins", inp.value.trim(), true, null);
-      emitirAlertaNextel();
-      inp.value = '';
-      document.getElementById('popup-mencoes').style.display = 'none';
-    }
-
-    function adicionarBalaoChat(autor, texto, isMe, audioUrl) {
-      const box = document.getElementById('chat-body');
-      if (box.innerText.includes('Inicie a conversa')) box.innerHTML = '';
-
-      const div = document.createElement('div');
-      div.className = `bubble ${isMe ? 'me' : 'them'}`;
-      
-      let conteudo = texto;
-      if (texto.includes('@')) {
-        conteudo = texto.replace(/(@\w+(\s\w+)?)/g, '<span class="tag-mencao">$1</span>');
-      }
-
-      if (audioUrl) {
-        conteudo += `<br><audio controls style="max-width:200px; height:30px; margin-top:4px;"><source src="${audioUrl}" type="audio/mp3"></audio>`;
-      }
-
-      const hora = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-      div.innerHTML = `
-        <div class="bubble-author">${autor}</div>
-        <div>${conteudo}</div>
-        <div class="bubble-time">${hora}</div>
-      `;
-
-      box.appendChild(div);
-      box.scrollTop = box.scrollHeight;
-    }
-  </script>
-</body>
-</html>
+                <text x="100" y="166" font-family="sans-serif" font-weight="800" font-size="1
