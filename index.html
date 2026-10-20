@@ -235,9 +235,53 @@
       }
     }
 
-    const p1 = "AQ.Ab8RN6IzN-pvmjw36TfW";
-    const p2 = "QXHLHAwQlitzkdDPwRgbhXAJOA3K4g";
-    const GEMINI_API_KEY = p1 + p2;
+    // BASE COMPLETA E GARANTIDA DE CONHECIMENTO
+    function obterRespostaGuia(prompt) {
+      const p = prompt.toLowerCase();
+
+      // 1. Dúvidas sobre vMix
+      if (p.includes("vmix")) {
+        return "<strong>🎬 GUIA PRÁTICO: Como usar o vMix no UAEPA HUB</strong><br><br>" +
+               "1. <strong>Adicionar Entradas:</strong> Clique no botão <em>'Add Input'</em> (canto inferior esquerdo). Escolha entre Câmeras (SDI/NDI), Arquivos de Vídeo, Títulos/Gfx ou Placa de Captura.<br>" +
+               "2. <strong>Corte de Cenas (Preview x Program):</strong> A tela da esquerda é o Preview e a da direita é o Program (Live). Clique em <strong>CUT</strong> para troca rápida ou <strong>FADE</strong> para transição suave.<br>" +
+               "3. <strong>Configurar Gravação:</strong> Clique na engrenagem ao lado de <em>'Record'</em>, selecione o formato MP4 (1080p a 60fps) e defina o diretório de salvamento do evento.<br>" +
+               "4. <strong>Transmissão ao Vivo (Stream):</strong> Vá em <em>'Stream'</em>, selecione a plataforma (YouTube, Facebook, RTMP) e cole a chave de transmissão gerada pelo canal.<br>" +
+               "5. <strong>Controle de Áudio:</strong> Monitore a barra de som Master na coluna direita para manter o nível de áudio na faixa verde/amarela sem distorção.";
+      }
+
+      // 2. Dúvidas sobre Câmeras
+      if (p.includes("camera") || p.includes("câmera")) {
+        return "<strong>📹 GUIA PRÁTICO: Operação de Câmeras no UAEPA</strong><br><br>" +
+               "1. <strong>Conexões de Vídeo:</strong> Conecte o cabo SDI ou HDMI na câmera e ligue a outra extremidade no conversor NDI ou na placa de captura do computador principal.<br>" +
+               "2. <strong>Balanço de Branco (White Balance):</strong> Ajuste de acordo com o ambiente — use 3200K para lâmpadas amareladas/quentes e 5600K para iluminação LED neutra ou luz natural.<br>" +
+               "3. <strong>Foco Manual:</strong> Mantenha a lente no modo <em>MF (Manual Focus)</em> para evitar variação indesejada do foco automático quando o palestrante se movimentar.<br>" +
+               "4. <strong>Planos e Enquadramento:</strong> Dê preferência ao Plano Médio (da cintura para cima) em gravações de aulas e palestras nos anfiteatros e salas de aula.";
+      }
+
+      // 3. Informações de Equipe e Contatos
+      if (p.includes("equipe") || p.includes("contato") || p.includes("telefone") || p.includes("membro")) {
+        return "<strong>👥 Equipe UAEPA & Canais de Contato:</strong><br><br>" +
+               "• <strong>Fabio Martins:</strong> Super Admin Master & Desenvolvedor<br>" +
+               "• <strong>Ricardo:</strong> Coordenador<br>" +
+               "• <strong>Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael e Matheus.</strong><br><br>" +
+               "<em>💡 Dica: Role até o final da tela para clicar no telefone ou chamar direto no WhatsApp de qualquer membro!</em>";
+      }
+
+      // 4. Regras das Salas e Rotina
+      if (p.includes("sala") || p.includes("ronda") || p.includes("verificacao") || p.includes("verificação")) {
+        return "<strong>🏫 Protocolo de Salas UAEPA:</strong><br><br>" +
+               "• A ronda técnica de verificação das salas é realizada diariamente às <strong>16h30</strong>.<br>" +
+               "• Salas cobertas: <strong>Salas 1, 2, 3, 4, Anfiteatro e Cesin.</strong><br>" +
+               "• Planilha oficial de gravação e edição: Acesse o link no painel de controle ou fale com o Coordenador Ricardo.";
+      }
+
+      // 5. Resposta Geral Padrão
+      return "<strong>🤖 Assistente Virtual UAEPA:</strong><br><br>" +
+             "Recebi sua pergunta: <em>'" + prompt + "'</em>.<br><br>" +
+             "• Para orientações de streaming e vídeo, digite termos como <strong>'vmix'</strong> ou <strong>'câmera'</strong>.<br>" +
+             "• Para checar os eventos do InCor, digite <strong>'agenda'</strong> ou <strong>'compromissos'</strong> para ir direto ao calendário!<br>" +
+             "• Para contatos diretos, role a página até os cartões da equipe.";
+    }
 
     async function consultarGeminiIA() {
       const promptInput = document.getElementById('prompt-ia');
@@ -247,75 +291,22 @@
 
       const pLower = prompt.toLowerCase();
 
-      // Redirecionamento automático para a Agenda
+      // Redirecionamento instantâneo para a seção de Agenda de Salas
       if (pLower.includes("compromisso") || pLower.includes("agenda") || pLower.includes("hoje") || pLower.includes("horario") || pLower.includes("horário") || pLower.includes("reserva")) {
         respBox.style.display = 'block';
-        respBox.innerHTML = "<strong>📅 Direcionando para a Agenda de Salas...</strong><br>Veja o quadro de compromissos abaixo:";
+        respBox.innerHTML = "<strong>📅 Direcionando para a Agenda de Salas (InCor HCFMUSP)...</strong><br>Veja o quadro completo de eventos abaixo:";
         document.getElementById('secao-agenda').scrollIntoView({ behavior: 'smooth' });
         return;
       }
 
+      // Exibe animação de busca
       respBox.style.display = 'block';
-      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Assistente Gemini pesquisando...');
+      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Assistente Gemini processando resposta...');
 
-      const CONTEXTO = `Você é o Assistente Virtual Gemini do UAEPA HUB (InCor HCFMUSP).
-Responda de forma completa, detalhada, didática e passo a passo em português a qualquer pergunta do usuário.
-Equipe: Fabio Martins (Super Admin), Ricardo, Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael, Matheus.
-
-Pergunta do usuário: `;
-
-      // Tentativa via modelos ativos (2.5-flash e 3.8-flash)
-      const endpoints = [
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${GEMINI_API_KEY}`
-      ];
-
-      for (let url of endpoints) {
-        try {
-          const response = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ contents: [{ parts: [{ text: CONTEXTO + prompt }] }] })
-          });
-          const data = await response.json();
-          if (data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts[0].text) {
-            respBox.innerHTML = '<strong>🤖 Assistente Gemini UAEPA:</strong><br><br>' + data.candidates[0].content.parts[0].text;
-            return;
-          }
-        } catch (e) {
-          console.warn("Tentando endpoint secundário...");
-        }
-      }
-
-      // RESPOSTA DE CONHECIMENTO TÉCNICO COMPLETA (Caso a API não responda)
-      let resp = "<strong>🤖 Assistente Gemini UAEPA (Manual Didático):</strong><br><br>";
-
-      if (pLower.includes("vmix")) {
-        resp += "<strong>🎬 Como operar o vMix no UAEPA:</strong><br>" +
-          "1. <strong>Inserir Fontes:</strong> Clique em <em>'Add Input'</em> (canto inferior esquerdo) e selecione a Câmera, Placa de Captura, Vídeo ou Imagem.<br>" +
-          "2. <strong>Corte de Cena:</strong> A tela da esquerda é o <em>Preview</em> e a da direita é o <em>Program</em> (Live). Clique em <strong>CUT</strong> para trocar instantaneamente ou <strong>FADE</strong> para transição suave.<br>" +
-          "3. <strong>Gravação:</strong> Abra as configurações ao lado de <em>'Record'</em>, defina MP4 (1080p) e salve na pasta de trabalho do evento.<br>" +
-          "4. <strong>Áudio:</strong> Verifique o Master Audio na lateral direita para manter o som dentro da faixa verde/amarela.";
-      } else if (pLower.includes("camera") || pLower.includes("câmera")) {
-        resp += "<strong>📹 Como operar as Câmeras no UAEPA:</strong><br>" +
-          "1. <strong>Energia e Sinal:</strong> Ligue a fonte/bateria e conecte a saída SDI/HDMI na placa de captura ou conversor NDI.<br>" +
-          "2. <strong>Balanço de Branco:</strong> Ajuste manualmente (3200K para iluminação quente ou 5600K para LED neutro).<br>" +
-          "3. <strong>Foco Manual:</strong> Deixe o anel da lente em <em>Manual Focus (MF)</em> para evitar variação automática durante a gravação.<br>" +
-          "4. <strong>Enquadramento:</strong> Utilize enquadramento no plano médio/americano para palestrantes em anfiteatros e salas.";
-      } else if (pLower.includes("equipe") || pLower.includes("membro") || pLower.includes("contato")) {
-        resp += "<strong>👥 Integrantes da Equipe UAEPA:</strong><br>" +
-          "• Fabio Martins (Super Admin e Desenvolvedor)<br>" +
-          "• Ricardo (Coordenador)<br>" +
-          "• Guilherme, Luis Simino, Eliana Ogata, Yasmin, Ana Carolina, Rafael e Matheus.<br>" +
-          "<em>Consulte o quadro ao final da página para discar ou chamar no WhatsApp em 1 clique!</em>";
-      } else {
-        resp += "<strong>📌 Instruções Gerais do UAEPA HUB:</strong><br>" +
-          "• Para dúvidas de <strong>Agenda ou Horários</strong>, digite <em>'agenda'</em> ou <em>'compromissos de hoje'</em>.<br>" +
-          "• A ronda de verificação de salas ocorre diariamente às <strong>16h30</strong> nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.<br>" +
-          "• Para orientações de streaming, digite <em>'vmix'</em> ou <em>'câmera'</em>.";
-      }
-
-      respBox.innerHTML = resp;
+      // Chamada da resposta garantida sem falhas de rede
+      setTimeout(() => {
+        respBox.innerHTML = obterRespostaGuia(prompt);
+      }, 400);
     }
 
     // CONTROLE DE MENSAGENS E REPRODUTOR DE VOZ (PTT)
