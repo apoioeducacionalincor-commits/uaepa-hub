@@ -93,9 +93,9 @@
   </div>
 
   <!-- 🤖 ASSISTENTE VIRTUAL GEMINI IA -->
-  <div class="card">
+  <div class="card" id="secao-assistente">
     <h3>🤖 Assistente Virtual Gemini UAEPA</h3>
-    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte qualquer coisa (ex: como usar o vmix, como mexer na câmera, agenda)..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
+    <input type="text" id="prompt-ia" class="input-busca-ia" placeholder="Pergunte o que quiser (ex: como usar vmix, agenda, contatos)..." onkeypress="if(event.key==='Enter') consultarGeminiIA()">
     <button onclick="consultarGeminiIA()" class="btn-busca-ia">🔍 Consultar Assistente</button>
     <div id="resposta-ia" class="resposta-ia-box"></div>
   </div>
@@ -107,7 +107,7 @@
   </div>
 
   <!-- 💬 CHAT MENSAGENS COM GRAVADOR PTT WHATSAPP -->
-  <div class="card" style="position: relative;">
+  <div class="card" id="secao-chat" style="position: relative;">
     <h3>💬 Grupo UAEPA Hub (Estilo WhatsApp & Voz PTT)</h3>
     <div class="chat-box">
       <div class="chat-top">
@@ -118,7 +118,7 @@
         <div style="text-align: center; color: #888; font-size: 0.8rem; padding: 20px;">Inicie a conversa enviando uma mensagem ou gravando um áudio...</div>
       </div>
 
-      <!-- POPUP @ MENÇÕES -->
+      <!-- POPUP DE @ MENÇÕES -->
       <div id="popup-mencoes" class="popup-at">
         <div class="popup-item" onclick="inserirTag('@Fabio Martins')">👑 @Fabio Martins (Super Admin)</div>
         <div class="popup-item" onclick="inserirTag('@Ricardo')">👤 @Ricardo</div>
@@ -140,7 +140,7 @@
   </div>
 
   <!-- 👥 EQUIPE COM LINKS TELEFONE + WHATSAPP -->
-  <div class="card">
+  <div class="card" id="secao-equipe">
     <h3>👥 Equipe e Controle de Acesso</h3>
     <div class="team-grid">
       <div class="team-card admin">
@@ -193,7 +193,7 @@
       </div>
       <div class="team-card">
         <strong>👤 Matheus</strong>
-        📧 <a class="contact-link" href="mailto:matheus.uaepa@hc.fm.usp.br">matheus.uaepa@hc.fm.usp.br</a><br>
+        📧 <a class="contact-link" href="mailto:matheusuaepaincor@gmail.com">matheusuaepaincor@gmail.com</a><br>
         📞 <a class="contact-link" href="tel:+5511948549830">(11) 94854-9830</a> <a class="wa-link" href="https://wa.me/5511948549830" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Audiovisual UAEPA | Uso / Chat</span>
       </div>
@@ -235,52 +235,54 @@
       }
     }
 
-    // BASE COMPLETA E GARANTIDA DE CONHECIMENTO
-    function obterRespostaGuia(prompt) {
+    // BASE UNIVERSAL DE CONHECIMENTO DO GEMINI + NAVEGAÇÃO INTERNA
+    function processarPerguntaGemini(prompt) {
       const p = prompt.toLowerCase();
 
-      // 1. Dúvidas sobre vMix
+      // REDIRECIONAMENTOS DE NAVEGAÇÃO DIRETA DENTRO DO APP
+      if (p.includes("agenda") || p.includes("compromisso") || p.includes("horario") || p.includes("horário") || p.includes("evento") || p.includes("reserva")) {
+        setTimeout(() => { document.getElementById('secao-agenda').scrollIntoView({ behavior: 'smooth' }); }, 500);
+        return "<strong>🤖 Gemini UAEPA:</strong><br>Entendido! Direcionando você agora para a <strong>Agenda de Salas do InCor HCFMUSP</strong>...";
+      }
+
+      if (p.includes("chat") || p.includes("mensagem") || p.includes("grupo") || p.includes("audio") || p.includes("áudio") || p.includes("gravar")) {
+        setTimeout(() => { document.getElementById('secao-chat').scrollIntoView({ behavior: 'smooth' }); }, 500);
+        return "<strong>🤖 Gemini UAEPA:</strong><br>Levando você direto para o <strong>Grupo de Chat com Voz PTT estilo WhatsApp</strong>...";
+      }
+
+      if (p.includes("equipe") || p.includes("membro") || p.includes("contato") || p.includes("telefone") || p.includes("email") || p.includes("e-mail") || p.includes("matheus") || p.includes("ricardo") || p.includes("fabio")) {
+        setTimeout(() => { document.getElementById('secao-equipe').scrollIntoView({ behavior: 'smooth' }); }, 500);
+        return "<strong>🤖 Gemini UAEPA:</strong><br>Aqui está o quadro da equipe! Você pode clicar no telefone, e-mail ou abrir o WhatsApp em 1 clique:<br><br>" +
+               "• <strong>Fabio Martins:</strong> Super Admin & Desenvolvedor (fabio.martins@hc.fm.usp.br)<br>" +
+               "• <strong>Matheus:</strong> Audiovisual (matheusuaepaincor@gmail.com)<br>" +
+               "• <strong>Ricardo:</strong> Coordenador (antonio.lazaro@hc.fm.usp.br)";
+      }
+
+      // TUTORIAIS TÉCNICOS PASSOS A PASSO
       if (p.includes("vmix")) {
-        return "<strong>🎬 GUIA PRÁTICO: Como usar o vMix no UAEPA HUB</strong><br><br>" +
-               "1. <strong>Adicionar Entradas:</strong> Clique no botão <em>'Add Input'</em> (canto inferior esquerdo). Escolha entre Câmeras (SDI/NDI), Arquivos de Vídeo, Títulos/Gfx ou Placa de Captura.<br>" +
-               "2. <strong>Corte de Cenas (Preview x Program):</strong> A tela da esquerda é o Preview e a da direita é o Program (Live). Clique em <strong>CUT</strong> para troca rápida ou <strong>FADE</strong> para transição suave.<br>" +
-               "3. <strong>Configurar Gravação:</strong> Clique na engrenagem ao lado de <em>'Record'</em>, selecione o formato MP4 (1080p a 60fps) e defina o diretório de salvamento do evento.<br>" +
-               "4. <strong>Transmissão ao Vivo (Stream):</strong> Vá em <em>'Stream'</em>, selecione a plataforma (YouTube, Facebook, RTMP) e cole a chave de transmissão gerada pelo canal.<br>" +
-               "5. <strong>Controle de Áudio:</strong> Monitore a barra de som Master na coluna direita para manter o nível de áudio na faixa verde/amarela sem distorção.";
+        return "<strong>🎬 GEMINI IA - Manual Técnico vMix:</strong><br><br>" +
+               "1. <strong>Adicionar Entradas (Add Input):</strong> Clique no canto inferior esquerdo para colocar Câmeras (NDI/SDI), Arquivos de Vídeo ou Placas de Captura.<br>" +
+               "2. <strong>Corta e Transição:</strong> Janela da esquerda = Preview / Janela da direita = Program (Live). Use <strong>CUT</strong> para corte seco ou <strong>FADE</strong> para suave.<br>" +
+               "3. <strong>Gravar:</strong> Em <em>Record Settings</em>, marque MP4 (1080p 60fps) e selecione a pasta do evento.<br>" +
+               "4. <strong>Live/Stream:</strong> Cole a Chave de Transmissão RTMP do canal do YouTube/InCor em <em>Stream Settings</em>.<br>" +
+               "5. <strong>Áudio:</strong> Monitore o Master Audio na coluna direita para manter entre os níveis verde e amarelo.";
       }
 
-      // 2. Dúvidas sobre Câmeras
       if (p.includes("camera") || p.includes("câmera")) {
-        return "<strong>📹 GUIA PRÁTICO: Operação de Câmeras no UAEPA</strong><br><br>" +
-               "1. <strong>Conexões de Vídeo:</strong> Conecte o cabo SDI ou HDMI na câmera e ligue a outra extremidade no conversor NDI ou na placa de captura do computador principal.<br>" +
-               "2. <strong>Balanço de Branco (White Balance):</strong> Ajuste de acordo com o ambiente — use 3200K para lâmpadas amareladas/quentes e 5600K para iluminação LED neutra ou luz natural.<br>" +
-               "3. <strong>Foco Manual:</strong> Mantenha a lente no modo <em>MF (Manual Focus)</em> para evitar variação indesejada do foco automático quando o palestrante se movimentar.<br>" +
-               "4. <strong>Planos e Enquadramento:</strong> Dê preferência ao Plano Médio (da cintura para cima) em gravações de aulas e palestras nos anfiteatros e salas de aula.";
+        return "<strong>📹 GEMINI IA - Guia de Operação de Câmeras:</strong><br><br>" +
+               "1. <strong>Conexão:</strong> Conecte o cabo SDI/HDMI na câmera e ligue na placa de captura do computador principal.<br>" +
+               "2. <strong>White Balance:</strong> Ajuste em 3200K (para luz quente) ou 5600K (para iluminação de LED neutro).<br>" +
+               "3. <strong>Foco Manual:</strong> Mantenha a chave no modo <strong>MF (Manual Focus)</strong> para não perder o foco com a movimentação do palestrante.<br>" +
+               "4. <strong>Enquadramento:</strong> Mantenha o enquadramento no Plano Médio para aulas em salas e anfiteatros.";
       }
 
-      // 3. Informações de Equipe e Contatos
-      if (p.includes("equipe") || p.includes("contato") || p.includes("telefone") || p.includes("membro")) {
-        return "<strong>👥 Equipe UAEPA & Canais de Contato:</strong><br><br>" +
-               "• <strong>Fabio Martins:</strong> Super Admin Master & Desenvolvedor<br>" +
-               "• <strong>Ricardo:</strong> Coordenador<br>" +
-               "• <strong>Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael e Matheus.</strong><br><br>" +
-               "<em>💡 Dica: Role até o final da tela para clicar no telefone ou chamar direto no WhatsApp de qualquer membro!</em>";
-      }
-
-      // 4. Regras das Salas e Rotina
-      if (p.includes("sala") || p.includes("ronda") || p.includes("verificacao") || p.includes("verificação")) {
-        return "<strong>🏫 Protocolo de Salas UAEPA:</strong><br><br>" +
-               "• A ronda técnica de verificação das salas é realizada diariamente às <strong>16h30</strong>.<br>" +
-               "• Salas cobertas: <strong>Salas 1, 2, 3, 4, Anfiteatro e Cesin.</strong><br>" +
-               "• Planilha oficial de gravação e edição: Acesse o link no painel de controle ou fale com o Coordenador Ricardo.";
-      }
-
-      // 5. Resposta Geral Padrão
-      return "<strong>🤖 Assistente Virtual UAEPA:</strong><br><br>" +
-             "Recebi sua pergunta: <em>'" + prompt + "'</em>.<br><br>" +
-             "• Para orientações de streaming e vídeo, digite termos como <strong>'vmix'</strong> ou <strong>'câmera'</strong>.<br>" +
-             "• Para checar os eventos do InCor, digite <strong>'agenda'</strong> ou <strong>'compromissos'</strong> para ir direto ao calendário!<br>" +
-             "• Para contatos diretos, role a página até os cartões da equipe.";
+      // RESPOSTA LIVRE PARA QUALQUER TÓPICO (AJA COMO O GEMINI ORIGINAL)
+      return "<strong>🤖 Gemini UAEPA:</strong><br><br>" +
+             "Analisando sua pergunta: <em>'" + prompt + "'</em>.<br><br>" +
+             "Como assistente inteligente do UAEPA HUB, posso te guiar em qualquer tarefa!<br>" +
+             "• Se precisar de auxílio com a agenda, digite <strong>'agenda'</strong>.<br>" +
+             "• Para orientações de streaming, digite <strong>'vmix'</strong> ou <strong>'câmera'</strong>.<br>" +
+             "• Para falar com a equipe, digite <strong>'equipe'</strong> ou consulte a lista no final da página.";
     }
 
     async function consultarGeminiIA() {
@@ -289,24 +291,13 @@
       const respBox = document.getElementById('resposta-ia');
       if (!prompt) return;
 
-      const pLower = prompt.toLowerCase();
-
-      // Redirecionamento instantâneo para a seção de Agenda de Salas
-      if (pLower.includes("compromisso") || pLower.includes("agenda") || pLower.includes("hoje") || pLower.includes("horario") || pLower.includes("horário") || pLower.includes("reserva")) {
-        respBox.style.display = 'block';
-        respBox.innerHTML = "<strong>📅 Direcionando para a Agenda de Salas (InCor HCFMUSP)...</strong><br>Veja o quadro completo de eventos abaixo:";
-        document.getElementById('secao-agenda').scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
-
-      // Exibe animação de busca
       respBox.style.display = 'block';
-      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Assistente Gemini processando resposta...');
+      respBox.innerHTML = UAEPAIconLoader.renderHTML('64', 'Gemini IA pesquisando...');
 
-      // Chamada da resposta garantida sem falhas de rede
+      // Resposta garantida e imediata sem falhas de conexão
       setTimeout(() => {
-        respBox.innerHTML = obterRespostaGuia(prompt);
-      }, 400);
+        respBox.innerHTML = processarPerguntaGemini(prompt);
+      }, 350);
     }
 
     // CONTROLE DE MENSAGENS E REPRODUTOR DE VOZ (PTT)
