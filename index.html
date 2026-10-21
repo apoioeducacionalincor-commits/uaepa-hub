@@ -8,6 +8,7 @@
     DATA DE NASCIMENTO: 24/04/1979
     CONTATO/E-MAIL PESSOAL: fabiomartinsfotoprofissional@gmail.com
     PROPRIEDADE / USO OPERACIONAL: UAEPA - InCor HCFMUSP
+    PERMISSÕES: FABIO MARTINS (ÚNICO EDITOR / SUPER ADMIN). DEMAIS INTEGRANTES (VISUALIZAÇÃO E USO TOTAL).
     DIREITOS MORAIS DE AUTORIA PRESERVADOS CONFORME LEI Nº 9.609/1998 (ART. 4º) E LEI Nº 9.610/1998
     ========================================================================================
   -->
@@ -15,7 +16,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>UAEPA HUB - InCor HCFMUSP</title>
   
-  <!-- Ícone Vetorial SVG Embutido HD -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='120' fill='%23002288'/><circle cx='256' cy='180' r='60' fill='%23CC0011'/><path d='M140,230 C150,100 362,100 372,230 C360,310 152,310 140,230 Z' fill='none' stroke='%23ffffff' stroke-width='26'/><text x='256' y='385' font-family='sans-serif' font-weight='900' font-size='70' fill='%23ffffff' text-anchor='middle'>UAEPA</text><text x='256' y='445' font-family='sans-serif' font-weight='800' font-size='45' fill='%23FF3344' text-anchor='middle'>HUB</text></svg>">
   <meta name="apple-mobile-web-app-title" content="UAEPA HUB">
@@ -35,45 +35,23 @@
     .badge-master { background: #002288; color: white; padding: 3px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: bold; display: inline-block; }
     .badge-user { background: #64748b; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.65rem; font-weight: normal; display: inline-block; margin-top: 2px; }
 
-    /* LINKS CLICÁVEIS DE CONTATO COM SUPORTE A WHATSAPP */
     .contact-link { color: #002288; text-decoration: none; font-weight: 600; word-break: break-all; cursor: pointer; }
     .contact-link:hover { text-decoration: underline; color: #0055ff; }
     .wa-link { color: #25D366; text-decoration: none; font-weight: bold; margin-left: 4px; }
     .wa-link:hover { text-decoration: underline; }
 
-    /* CHAT WHATSAPP COM PTT E MARCA D'ÁGUA ANIMADA UAEPA HUB */
+    .btn-agenda-direct { display: block; width: 100%; text-align: center; padding: 10px; background: #002288; color: white; font-weight: bold; text-decoration: none; border-radius: 8px; font-size: 0.88rem; margin-bottom: 10px; box-sizing: border-box; }
+    .btn-agenda-direct:hover { background: #0055ff; }
+
     .chat-box { background: #efeae2; border-radius: 10px; height: 420px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; position: relative; }
     .chat-top { background: #075e54; color: white; padding: 10px 14px; font-weight: bold; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; z-index: 2; }
     
-    .chat-body { 
-      flex: 1; 
-      padding: 12px; 
-      overflow-y: auto; 
-      display: flex; 
-      flex-direction: column; 
-      gap: 8px; 
-      position: relative;
-      z-index: 2;
-    }
+    .chat-body { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 2; }
 
-    /* FUNDO ANIMADO COM O ÍCONE UAEPA HUB GIRANDO SUAVEMENTE */
     .chat-bg-watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 220px;
-      height: 220px;
-      margin-top: -110px;
-      margin-left: -110px;
-      opacity: 0.12;
-      pointer-events: none;
-      z-index: 1;
-      animation: uaepaBgSpin 20s linear infinite;
+      position: absolute; top: 50%; left: 50%; width: 220px; height: 220px; margin-top: -110px; margin-left: -110px; opacity: 0.12; pointer-events: none; z-index: 1; animation: uaepaBgSpin 20s linear infinite;
     }
-    @keyframes uaepaBgSpin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    @keyframes uaepaBgSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     
     .bubble { max-width: 80%; padding: 8px 10px; border-radius: 8px; font-size: 0.86rem; position: relative; word-break: break-word; box-shadow: 0 1px 2px rgba(0,0,0,0.2); z-index: 3; }
     .bubble.me { align-self: flex-end; background-color: #d9fdd3; color: #111b21; border-top-right-radius: 0; }
@@ -91,17 +69,14 @@
     
     .btn-send { width: 42px; height: 42px; border-radius: 50%; background: #002288; color: white; border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-    /* POPUP DE @ MENÇÕES */
     .popup-at { position: absolute; bottom: 60px; left: 10px; right: 10px; background: white; border-radius: 8px; border: 1px solid #ccc; display: none; box-shadow: 0 -4px 10px rgba(0,0,0,0.15); z-index: 10; max-height: 200px; overflow-y: auto; }
     .popup-item { padding: 8px 12px; font-size: 0.85rem; cursor: pointer; border-bottom: 1px solid #eee; }
     .popup-item:hover { background: #f0f4ff; }
 
-    /* BUSCA GEMINI IA */
     .input-busca-ia { width: calc(100% - 22px); padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 0.9rem; margin-bottom: 8px; outline: none; }
     .btn-busca-ia { width: 100%; padding: 10px; background: #002288; color: white; font-weight: bold; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer; }
     .resposta-ia-box { margin-top: 10px; padding: 12px; background: #f0f4ff; border-left: 4px solid #002288; border-radius: 8px; font-size: 0.88rem; display: none; line-height: 1.5; white-space: pre-wrap; }
 
-    /* LOADER ANIMADO UAEPA */
     .uaepa-loader-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; width: 100%; box-sizing: border-box; }
     .uaepa-loader-container.size-64 .uaepa-loader { width: 64px; height: 64px; }
     .uaepa-loader { display: block; overflow: visible; }
@@ -111,7 +86,6 @@
     @keyframes uaepaPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.95); opacity: 0.9; } }
     .uaepa-loader-text { margin-top: 8px; font-size: 0.82rem; font-weight: bold; color: #002288; text-align: center; }
 
-    /* LISTA DE MEMBROS */
     .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; margin-top: 8px; }
     .team-card { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #002288; border-radius: 8px; padding: 10px; font-size: 0.82rem; line-height: 1.5; }
     .team-card.admin { border-left-color: #002288; background: #f0f4ff; }
@@ -120,7 +94,6 @@
     .card-agenda-destaque { border: 2px solid #002288; }
     .frame-agenda { width: 100%; height: 450px; border: none; border-radius: 8px; background: #ffffff; }
     
-    /* RODAPÉ DO DESENVOLVEDOR */
     .footer-dev { text-align: center; font-size: 0.8rem; color: #475569; margin-top: 20px; padding: 16px; background: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); line-height: 1.6; }
   </style>
 </head>
@@ -139,10 +112,11 @@
     <div id="resposta-ia" class="resposta-ia-box"></div>
   </div>
 
-  <!-- 📅 AGENDA DE SALAS -->
+  <!-- 📅 AGENDA DE SALAS - LINK CORRIGIDO COM MULTI-CALENDÁRIO E ATALHO DE APP -->
   <div class="card card-agenda-destaque" id="secao-agenda">
     <h3>📅 Agenda de Eventos & Salas (InCor HCFMUSP)</h3>
-    <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&ctz=America%2FSao_Paulo&mode=AGENDA"></iframe>
+    <a class="btn-agenda-direct" href="https://calendar.google.com/calendar/u/0/r?cid=apoioeducacional.incor@fm.usp.br&cid=telemedicinaincor@gmail.com" target="_blank">📅 Abrir ou Adicionar no Meu Google Agenda</a>
+    <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&src=telemedicinaincor%40gmail.com&ctz=America%2FSao_Paulo&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=1"></iframe>
   </div>
 
   <!-- 💬 CHAT MENSAGENS COM MARCA D'ÁGUA ANIMADA NO FUNDO -->
@@ -154,7 +128,6 @@
         <span id="user-display" style="font-size: 0.75rem; opacity: 0.9;">Fabio Martins (Super Admin)</span>
       </div>
 
-      <!-- MARCA D'ÁGUA ANIMADA NO FUNDO DO MENSAGEIRO -->
       <svg class="chat-bg-watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="bgGradBlue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#002288"/><stop offset="100%" stop-color="#0066FF"/></linearGradient>
@@ -177,7 +150,6 @@
         <div style="text-align: center; color: #666; font-size: 0.8rem; padding: 20px; font-weight: 500;">Inicie a conversa enviando uma mensagem ou gravando um áudio...</div>
       </div>
 
-      <!-- POPUP DE @ MENÇÕES -->
       <div id="popup-mencoes" class="popup-at">
         <div class="popup-item" onclick="inserirTag('@Fabio Martins')">👑 @Fabio Martins (Super Admin)</div>
         <div class="popup-item" onclick="inserirTag('@Ricardo')">👤 @Ricardo</div>
@@ -266,7 +238,6 @@
     </div>
   </div>
 
-  <!-- RODAPÉ DE CRÉDITOS DO DESENVOLVEDOR MASTER -->
   <div class="footer-dev">
     <span class="badge-master">SUPER ADMIN MASTER & DESENVOLVEDOR</span><br>
     <strong>Fabio Martins</strong> | 📧 <a class="contact-link" href="mailto:fabio.martins@hc.fm.usp.br">fabio.martins@hc.fm.usp.br</a> | 📞 <a class="contact-link" href="tel:+5511947917162">(11) 94791-7162</a> <a class="wa-link" href="https://wa.me/5511947917162" target="_blank">💬 WhatsApp</a><br>
@@ -274,7 +245,6 @@
   </div>
 
   <script>
-    // ASSINATURA DE AUTORIA TÉCNICA INALIENÁVEL (LEI Nº 9.609/1998 ART. 4º)
     const UAEPA_AUTHOR_INFO = Object.freeze({
       legalName: "Fabio Correia Martins",
       socialName: "Fabio Martins",
@@ -394,7 +364,6 @@ Pergunta do usuário: `;
       }, 300);
     }
 
-    // CONTROLE DE MENSAGENS E REPRODUTOR DE VOZ (PTT)
     function checarArroba(input) {
       const pop = document.getElementById('popup-mencoes');
       if (input.value.endsWith('@')) pop.style.display = 'block';
@@ -444,7 +413,6 @@ Pergunta do usuário: `;
       box.scrollTop = box.scrollHeight;
     }
 
-    // GRAVAÇÃO DE VOZ COM WEB AUDIO API
     let mediaRecorder = null;
     let chunks = [];
     let recording = false;
