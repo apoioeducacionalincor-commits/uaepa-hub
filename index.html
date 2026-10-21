@@ -31,19 +31,48 @@
     .wa-link { color: #25D366; text-decoration: none; font-weight: bold; margin-left: 4px; }
     .wa-link:hover { text-decoration: underline; }
 
-    /* CHAT WHATSAPP COM PTT E ÁUDIO */
-    .chat-box { background: #efeae2; border-radius: 10px; height: 420px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; }
-    .chat-top { background: #075e54; color: white; padding: 10px 14px; font-weight: bold; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
-    .chat-body { flex: 1; padding: 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background-image: radial-gradient(#cbd5e1 1px, transparent 0); background-size: 10px 10px; }
+    /* CHAT WHATSAPP COM PTT E MARCA D'ÁGUA ANIMADA UAEPA HUB */
+    .chat-box { background: #efeae2; border-radius: 10px; height: 420px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #cccccc; position: relative; }
+    .chat-top { background: #075e54; color: white; padding: 10px 14px; font-weight: bold; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; z-index: 2; }
     
-    .bubble { max-width: 80%; padding: 8px 10px; border-radius: 8px; font-size: 0.86rem; position: relative; word-break: break-word; box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+    .chat-body { 
+      flex: 1; 
+      padding: 12px; 
+      overflow-y: auto; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 8px; 
+      position: relative;
+      z-index: 2;
+    }
+
+    /* FUNDO ANIMADO COM O ÍCONE UAEPA HUB GIRANDO SUAVEMENTE */
+    .chat-bg-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 220px;
+      height: 220px;
+      margin-top: -110px;
+      margin-left: -110px;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 1;
+      animation: uaepaBgSpin 20s linear infinite;
+    }
+    @keyframes uaepaBgSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .bubble { max-width: 80%; padding: 8px 10px; border-radius: 8px; font-size: 0.86rem; position: relative; word-break: break-word; box-shadow: 0 1px 2px rgba(0,0,0,0.2); z-index: 3; }
     .bubble.me { align-self: flex-end; background-color: #d9fdd3; color: #111b21; border-top-right-radius: 0; }
     .bubble.them { align-self: flex-start; background-color: #ffffff; color: #111b21; border-top-left-radius: 0; }
     .bubble-author { font-size: 0.72rem; font-weight: bold; color: #075e54; margin-bottom: 3px; }
     .bubble-time { font-size: 0.62rem; color: #667781; text-align: right; margin-top: 4px; }
     .tag-mencao { background: #002288; color: white; padding: 1px 5px; border-radius: 3px; font-weight: bold; font-size: 0.75rem; }
 
-    .chat-controls { display: flex; padding: 8px; background: #f0f2f5; gap: 6px; align-items: center; border-top: 1px solid #d1d7db; position: relative; }
+    .chat-controls { display: flex; padding: 8px; background: #f0f2f5; gap: 6px; align-items: center; border-top: 1px solid #d1d7db; position: relative; z-index: 2; }
     .input-chat { flex: 1; padding: 10px 12px; border-radius: 20px; border: 1px solid #ccc; font-size: 0.9rem; outline: none; background: #ffffff; }
     
     .btn-ptt-mic { width: 42px; height: 42px; border-radius: 50%; background: #00a884; color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; user-select: none; transition: background-color 0.2s ease, transform 0.2s ease; }
@@ -106,7 +135,7 @@
     <iframe class="frame-agenda" src="https://calendar.google.com/calendar/embed?src=apoioeducacional.incor%40fm.usp.br&ctz=America%2FSao_Paulo&mode=AGENDA"></iframe>
   </div>
 
-  <!-- 💬 CHAT MENSAGENS COM GRAVADOR PTT WHATSAPP -->
+  <!-- 💬 CHAT MENSAGENS COM MARCA D'ÁGUA ANIMADA NO FUNDO -->
   <div class="card" id="secao-chat" style="position: relative;">
     <h3>💬 Grupo UAEPA Hub (Estilo WhatsApp & Voz PTT)</h3>
     <div class="chat-box">
@@ -114,8 +143,28 @@
         <span>👥 Conversa em Tempo Real</span>
         <span id="user-display" style="font-size: 0.75rem; opacity: 0.9;">Fabio Martins (Super Admin)</span>
       </div>
+
+      <!-- MARCA D'ÁGUA ANIMADA NO FUNDO DO MENSAGEIRO -->
+      <svg class="chat-bg-watermark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bgGradBlue" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#002288"/><stop offset="100%" stop-color="#0066FF"/></linearGradient>
+          <linearGradient id="bgGradRed" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#CC0011"/><stop offset="100%" stop-color="#FF3344"/></linearGradient>
+        </defs>
+        <g>
+          <path d="M 60,88 C 65,45 135,45 140,88 C 135,115 65,115 60,88 Z" fill="none" stroke="url(#bgGradBlue)" stroke-width="5"/>
+          <circle cx="100" cy="72" r="10" fill="url(#bgGradRed)"/>
+          <text x="100" y="148" font-family="sans-serif" font-weight="900" font-size="20" fill="#002288" text-anchor="middle">UAEPA</text>
+          <rect x="68" y="154" width="64" height="16" rx="8" fill="url(#bgGradRed)"/>
+          <text x="100" y="166" font-family="sans-serif" font-weight="800" font-size="10" fill="#FFFFFF" text-anchor="middle">HUB</text>
+        </g>
+        <g>
+          <path d="M 100,12 A 88,88 0 0,1 176,56" fill="none" stroke="url(#bgGradBlue)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M 188,100 A 88,88 0 0,1 144,176" fill="none" stroke="url(#bgGradRed)" stroke-width="10" stroke-linecap="round"/>
+        </g>
+      </svg>
+
       <div id="chat-body" class="chat-body">
-        <div style="text-align: center; color: #888; font-size: 0.8rem; padding: 20px;">Inicie a conversa enviando uma mensagem ou gravando um áudio...</div>
+        <div style="text-align: center; color: #666; font-size: 0.8rem; padding: 20px; font-weight: 500;">Inicie a conversa enviando uma mensagem ou gravando um áudio...</div>
       </div>
 
       <!-- POPUP DE @ MENÇÕES -->
