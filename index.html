@@ -129,6 +129,7 @@
         <div class="popup-item" onclick="inserirTag('@Ana Carolina')">👤 @Ana Carolina</div>
         <div class="popup-item" onclick="inserirTag('@Rafael')">👤 @Rafael</div>
         <div class="popup-item" onclick="inserirTag('@Matheus')">👤 @Matheus</div>
+        <div class="popup-item" onclick="inserirTag('@Marcos')">👤 @Marcos</div>
       </div>
 
       <div class="chat-controls">
@@ -197,6 +198,12 @@
         📞 <a class="contact-link" href="tel:+5511948549830">(11) 94854-9830</a> <a class="wa-link" href="https://wa.me/5511948549830" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
         <span class="badge-user">Audiovisual UAEPA | Uso / Chat</span>
       </div>
+      <div class="team-card">
+        <strong>👤 Marcos</strong>
+        📧 <a class="contact-link" href="mailto:marcos.f@fm.hc.usp.br">marcos.f@fm.hc.usp.br</a><br>
+        📞 <a class="contact-link" href="tel:+5511967696076">(11) 96769-6076</a> <a class="wa-link" href="https://wa.me/5511967696076" target="_blank" title="Abrir no WhatsApp">💬 WhatsApp</a><br>
+        <span class="badge-user">Uso / Chat</span>
+      </div>
     </div>
   </div>
 
@@ -237,7 +244,6 @@
 
     const p1 = "AIzaSyC2q1K983f";
     const p2 = "87uN208mQ9s_x2zX784_M9k"; 
-    // Chave reconstruída com fallback universal
     const GEMINI_API_KEY = (typeof p1 !== 'undefined' && typeof p2 !== 'undefined') ? p1 + p2 : '';
 
     function verificarRolagemInterna(p) {
@@ -245,7 +251,7 @@
         setTimeout(() => { document.getElementById('secao-agenda').scrollIntoView({ behavior: 'smooth' }); }, 600);
       } else if (p.includes("chat") || p.includes("mensagem") || p.includes("grupo") || p.includes("audio") || p.includes("áudio")) {
         setTimeout(() => { document.getElementById('secao-chat').scrollIntoView({ behavior: 'smooth' }); }, 600);
-      } else if (p.includes("equipe") || p.includes("membro") || p.includes("contato") || p.includes("telefone") || p.includes("e-mail") || p.includes("matheus") || p.includes("ricardo") || p.includes("fabio")) {
+      } else if (p.includes("equipe") || p.includes("membro") || p.includes("contato") || p.includes("telefone") || p.includes("e-mail") || p.includes("marcos") || p.includes("matheus") || p.includes("ricardo") || p.includes("fabio")) {
         setTimeout(() => { document.getElementById('secao-equipe').scrollIntoView({ behavior: 'smooth' }); }, 600);
       }
     }
@@ -287,7 +293,7 @@ Responda diretamente e com linguagem amigável, clara e didática.
 Informações internas do UAEPA HUB:
 - Super Admin e Desenvolvedor: Fabio Martins (fabio.martins@hc.fm.usp.br, 11 94791-7162)
 - Coordenador: Ricardo (antonio.lazaro@hc.fm.usp.br, 11 97059-3639)
-- Equipe: Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael e Matheus (matheusuaepaincor@gmail.com, 11 94854-9830).
+- Equipe: Guilherme, Luis Simino, Eliana Ogata, Yasmin Vasquez, Ana Carolina, Rafael, Matheus (matheusuaepaincor@gmail.com, 11 94854-9830) e Marcos (marcos.f@fm.hc.usp.br, 11 96769-6076).
 - Ronda de salas: Diariamente às 16h30 nas Salas 1, 2, 3, 4, Anfiteatro e Cesin.
 
 Pergunta do usuário: `;
@@ -308,7 +314,6 @@ Pergunta do usuário: `;
         console.warn("Usando resposta local inteligente...");
       }
 
-      // Fallback local caso haja qualquer bloqueio na API
       setTimeout(() => {
         respBox.innerHTML = processarRespostaLocal(prompt);
       }, 300);
